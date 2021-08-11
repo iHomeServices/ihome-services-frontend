@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import {
   useFonts,
   Rubik_300Light,
