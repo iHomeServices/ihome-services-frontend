@@ -5,13 +5,13 @@ export const theme = {
         background: '#F8FBFF',
         
         heading: '#143656',
-        heading2: '#13497B',
-
+        
         text: '#000000',
         text2: '#D3DBE2',
 
         red: '#E83F67',
-        green: '#6CC775'
+        green: '#6CC775',
+        white: '#FFFF',
     },
     fonts: {
         text500: 'Rubik_500Medium',

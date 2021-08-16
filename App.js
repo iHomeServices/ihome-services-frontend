@@ -1,6 +1,4 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import {
   useFonts,
@@ -9,9 +7,15 @@ import {
   Rubik_500Medium,
 } from '@expo-google-fonts/rubik';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { Login } from './src/screens/Login';
+import { Home } from './src/screens/Home';
+
 export default function App() {
-   // carregamento de fontes
-   const [fontsLoaded] = useFonts({
+  // carregamento de fontes
+  const [fontsLoaded] = useFonts({
     Rubik_300Light,
     Rubik_400Regular,
     Rubik_500Medium,
@@ -21,19 +25,14 @@ export default function App() {
     return <AppLoading /> 
   }
 
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const Stack = createNativeStackNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
