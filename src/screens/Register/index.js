@@ -8,7 +8,7 @@ import { FluidButton } from '../../components/FluidButton';
 import { Input } from '../../components/Input';
 import { theme } from '../../global/styles/theme';
 
-export function Login({ navigation }) {
+export function Register({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
@@ -20,11 +20,11 @@ export function Login({ navigation }) {
                 <View style={styles.section}>
                     <View style={styles.article}>
                         <Text style={styles.title}>
-                            Bem-vindo
+                            Olá
                         </Text>
                         <Text style={styles.text}>
-                            Faça o login para alcançar mais
-                            profissionais
+                            Preencha os campos abaixa para 
+                            se cadastrar na plataforma.
                         </Text>
                     </View>
 
@@ -41,9 +41,7 @@ export function Login({ navigation }) {
                         title="LOGIN" />
 
                     <View>
-                        <Text onPress={() => navigation.navigate('Register')}>
-                            Cadastre-se
-                        </Text>
+                        
                     </View>
                 </View>
 
