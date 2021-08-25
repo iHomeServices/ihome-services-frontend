@@ -5,6 +5,7 @@ import {
   View
 } from 'react-native';
 import { Categories } from '../../components/Categories';
+import { Providers } from '../../components/Providers';
 
 import { styles } from './styles';
 
@@ -13,6 +14,7 @@ export function Home(){
     <View>
         <Text>Home page</Text>
         <Categories />
+        <Providers />
     </View>
   );
 }
