@@ -1,22 +1,25 @@
-import { Card, Avatar, ListItem } from 'react-native-elements';
 import React from 'react';
 
 import {
     View,
     Text,
     Button,
+    Image,
 } from 'react-native';
 
 import { styles } from './styles';
 
-export function ProviderItem({ item }) {
+export function ProviderItem({ provider }) {
     return (
-        <ListItem
-            key={item.id}
-            title={item.title}
-            subtitle={item.icon}
-            leftAvatar={{ source: require('../../assets/fotoPerfil.jpg') }}
-        />
+        <View style={styles.container}>
+            <Image
+                style={styles.avatar}
+                source={require('../../assets/fotoPerfil.jpg')}
+            />
+            <Text style={styles.name}>{provider.name}</Text>
+            <Text style={styles.category}>{provider.category}</Text>
+            <Text style={styles.price}>{provider.price}</Text>
+        </View>
     );
     // return (
     //     <Card

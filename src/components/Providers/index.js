@@ -10,54 +10,70 @@ import { styles } from './styles';
 const DATA = [
     {
         id: '1',
-        title: 'Jose Rezende',
-        icon: 'Pedreiro'
+        name: 'Jose Rezende',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '2',
-        title: 'Felipe Damasceno',
-        icon: 'Piscineiro'
+        name: 'Felipe Damasceno',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '3',
-        title: 'Felipe Damasceno',
-        icon: 'Piscineiro'
+        name: 'Felipe Damasceno',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '4',
-        title: 'Felipe Damasceno',
-        icon: 'Piscineiro'
+        name: 'Felipe Damasceno',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '5',
-        title: 'Felipe Damasceno',
-        icon: 'Piscineiro'
+        name: 'Felipe Damasceno',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '6',
-        title: 'Felipe Damasceno',
-        icon: 'Piscineiro'
+        name: 'Felipe Damasceno',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '7',
-        title: 'Felipe Damasceno',
-        icon: 'Piscineiro'
+        name: 'Felipe Damasceno',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '8',
-        title: 'Felipe Damasceno',
-        icon: 'Piscineiro'
+        name: 'Felipe Damasceno',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }
 ];
 export function Providers() {
-    const renderItem = ({ item }) => (
-        // <ProviderItem item={item} />
-        <ListItem
-            key={item.id}
-            title={item.title}
-            subtitle={item.icon}
-            leftAvatar={{ source: require('../../assets/fotoPerfil.jpg') }}
-        />
+    const renderProvider = (provider) => (
+        <ProviderItem provider={provider.item} />
     );
 
     return (
-        <View>
-            <FlatList data={DATA}
-                renderItem={renderItem}
-                keyExtractor={item => item.id} />
-        </View>
+        <FlatList data={DATA}
+            renderItem={renderProvider}
+            keyExtractor={provider => provider.id} />
     );
 }
