@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
     },
 
     section: {
+        flex: 1,
         height: "100%",
         backgroundColor: theme.colors.background,
         paddingHorizontal: 20,

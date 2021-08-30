@@ -45,9 +45,7 @@ export function Login({ navigation }) {
                             Cadastre-se
                         </Text>
                     </View>
-                </View>
-
-            
+                </View>            
             </ScrollView>
         </SafeAreaView>
     );

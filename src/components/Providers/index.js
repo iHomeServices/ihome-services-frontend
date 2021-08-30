@@ -64,6 +64,20 @@ const DATA = [
         category: 'Eletricista',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
+    }, {
+        id: '9',
+        name: 'Felipe Damasceno',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
+    }, {
+        id: '10',
+        name: 'Felipe Damasceno',
+        price: 'R$30/hr',
+        category: 'Eletricista',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }
 ];
 export function Providers() {

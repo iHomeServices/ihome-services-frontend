@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FlatList } from 'react-native';
 import { CategoryItem } from '../CategoryItem';
@@ -39,9 +39,13 @@ const DATA = [
     }
 ];
 export function Categories() {
+    const [isSelected, setIsSelected] = useState(false);
+
     const renderItem = ({item}) => (
-        // console.log(item)
-        <CategoryItem item={item} />
+        <CategoryItem  
+            onPress={() => setIsSelected(!isSelected)} 
+            item={item} 
+            isSelected={isSelected} />
     );
 
     return (
