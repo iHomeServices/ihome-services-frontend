@@ -21,20 +21,4 @@ export function ProviderItem({ provider }) {
             <Text style={styles.price}>{provider.price}</Text>
         </View>
     );
-    // return (
-    //     <Card
-    //         style={styles.container}
-    //         titleStyle={styles.title}
-    //         title={item.title}
-    //     >
-    //         <Avatar
-    //             rounded
-    //             source={require('../../assets/fotoPerfil.jpg')}
-    //         />
-    //         <Text
-    //             h1
-    //             style={styles.h3}
-    //         >R$30,00/hr</Text>
-    //     </Card>
-    // );
 }

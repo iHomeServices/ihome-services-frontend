@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, SafeAreaView, FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
 import { CategoryItem } from '../CategoryItem';
 
 import { styles } from './styles';
@@ -9,32 +9,33 @@ import { styles } from './styles';
 const DATA = [
     {
         id: '1',
-        title: 'First Item',
-        icon: 'g-translate'
+        name: 'Eletricista',
+        icon: 'flash'
     }, {
         id: '2',
-        title: 'Second Item',
-        icon: 'g-translate'
+        name: 'Pedreiro',
+        icon: 'home'
     }, {
         id: '3',
-        title: 'Second Item',
-        icon: 'g-translate'
+        name: 'Piscineiro',
+        // dont have the icon
+        icon: 'grav'
     }, {
         id: '4',
-        title: 'Second Item',
-        icon: 'g-translate'
+        name: 'Pintor',
+        icon: 'paint-brush'
+    }, {
+        id: '5',
+        name: 'Jardineiro',
+        icon: 'leaf'
     }, {
         id: '6',
-        title: 'Second Item',
-        icon: 'g-translate'
+        name: 'Jardineiro',
+        icon: 'leaf'
     }, {
         id: '7',
-        title: 'Second Item',
-        icon: 'g-translate'
-    }, {
-        id: '8',
-        title: 'Second Item',
-        icon: 'g-translate'
+        name: 'Jardineiro',
+        icon: 'leaf'
     }
 ];
 export function Categories() {

@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
         left: 0,
         height: 80,
         width: 80,
+        borderRadius: 40,
     },
     name: {
         position: 'relative',
@@ -25,5 +26,7 @@ export const styles = StyleSheet.create({
     },
     price: {
         alignSelf: 'flex-end',
+        alignItems:'center',
+        justifyContent: 'center',
     }
 });
