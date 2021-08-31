@@ -3,11 +3,8 @@ import { theme } from '../../global/styles/theme';
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1
-    },
-    input: {
-        paddingVertical: 10,
-        paddingHorizontal: 10,
+        height: 50,
+        paddingVertical: 12,
         marginBottom: 15,
 
         borderRadius: 10,        
@@ -23,7 +20,6 @@ export const styles = StyleSheet.create({
         shadowRadius: 18,
 
         elevation: 10,
-
     },
     label: {
         fontSize: 14,

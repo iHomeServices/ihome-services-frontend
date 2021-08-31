@@ -4,6 +4,8 @@ import { theme } from '../../global/styles/theme';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: theme.colors.background,
+        height: '100%'
     },
 
     logoContainer: {
@@ -32,10 +34,16 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
     },
 
+    boldText: {
+        fontFamily: theme.fonts.text500,
+        color: theme.colors.secondary,
+        fontSize: 14,
+        lineHeight: 17,
+    },
+
     section: {
         flex: 1,
         height: "100%",
-        backgroundColor: theme.colors.background,
         paddingHorizontal: 20,
         paddingVertical: 40,
     },
@@ -50,4 +58,9 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: theme.colors.secondary,
     },
+
+    footer: {
+        width: '100%',
+        paddingVertical: 20,
+    }
 });

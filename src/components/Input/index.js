@@ -8,7 +8,6 @@ export function Input({
     label,
     type,
     value,
-    onChange,
     ...props
 }) {
     return (

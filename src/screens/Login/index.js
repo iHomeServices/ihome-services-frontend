@@ -12,7 +12,6 @@ export function Login({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-
                 <View style={styles.logoContainer}>
                     <FullLogo width={"60%"} height={300} />
                 </View>
@@ -29,20 +28,19 @@ export function Login({ navigation }) {
                     </View>
 
                     <View style={styles.formGroup}>
-                        <Input label="Login" />
+                        <Input label="Email" />
                         <Input 
-                            label="Password" 
+                            label="Senha" 
                             secureTextEntry={true} />
                     </View>
 
-                    <Button 
+                    <FluidButton 
                         onPress={() => navigation.navigate('Home')}
-                        color={theme.colors.secondary} 
-                        title="LOGIN" />
+                        text="LOGIN" />
 
-                    <View>
-                        <Text onPress={() => navigation.navigate('Register')}>
-                            Cadastre-se
+                    <View style={styles.footer}>
+                        <Text style={styles.boldText} onPress={() => navigation.navigate('Register')}>
+                            Criar uma nova conta
                         </Text>
                     </View>
                 </View>            

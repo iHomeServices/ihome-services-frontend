@@ -31,6 +31,13 @@ export const styles = StyleSheet.create({
         fontFamily: theme.fonts.text300,
         textAlign: 'center',
     },
+    
+    boldText: {
+        fontFamily: theme.fonts.text500,
+        color: theme.colors.secondary,
+        fontSize: 14,
+        lineHeight: 17,
+    },
 
     section: {
         height: "100%",
@@ -43,10 +50,34 @@ export const styles = StyleSheet.create({
         marginVertical: 20
     },
 
+    row: {
+        width: '100%',
+        flexDirection: 'row',
+    },
+
+    col50:{
+        flexBasis: '50%',
+        paddingRight: 10,
+    },
+
+    col30:{
+        flexBasis: '30%',
+        paddingRight: 10,
+    },
+
+    col70:{
+        flexBasis: '70%',
+    },
+
     button: {
         width: '100%',
         paddingVertical: 20,
         borderRadius: 10,
         backgroundColor: theme.colors.secondary,
     },
+
+    footer: {
+        width: '100%',
+        paddingVertical: 20,
+    }
 });
