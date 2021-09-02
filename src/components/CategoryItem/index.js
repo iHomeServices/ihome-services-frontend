@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
     View,
@@ -11,14 +11,15 @@ import { theme } from '../../global/styles/theme';
 
 import { styles } from './styles';
 
-export function CategoryItem({ item, isSelected, onPress }) {
+export function CategoryItem({ item, onPress, selected }) {
 
     return (
-        <RectButton 
+        <RectButton
+            style={[styles.container, selected ? styles.selected : '']}
             onPress={onPress}
-            style={[styles.container, isSelected ? styles.selected : '']}>
-            <Icon name={item.icon} 
-                size={35} 
+        >
+            <Icon name={item.icon}
+                size={35}
                 color={theme.colors.text2} />
             <Text style={styles.name}>{item.name}</Text>
         </RectButton>

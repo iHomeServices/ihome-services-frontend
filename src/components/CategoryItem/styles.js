@@ -28,5 +28,5 @@ export const styles = StyleSheet.create({
     },
     selected: {
         backgroundColor: theme.colors.primary,
-    }
+    },
 });
