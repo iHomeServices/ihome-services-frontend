@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {styles} from './styles';
 import { FluidButton } from '../../components/FluidButton';
 import { Input } from '../../components/Input';
-import { theme } from '../../global/styles/theme';
 
 export function Login({ navigation }) {
     return (
