@@ -50,6 +50,10 @@ export const styles = StyleSheet.create({
         marginVertical: 20
     },
 
+    pr10: {
+        paddingRight: 10
+    },
+
     row: {
         width: '100%',
         flexDirection: 'row',
@@ -57,16 +61,15 @@ export const styles = StyleSheet.create({
 
     col50:{
         flexBasis: '50%',
+    },
+
+    col40:{
+        flexBasis: '40%',
         paddingRight: 10,
     },
 
-    col30:{
-        flexBasis: '30%',
-        paddingRight: 10,
-    },
-
-    col70:{
-        flexBasis: '70%',
+    col60:{
+        flexBasis: '60%',
     },
 
     button: {
