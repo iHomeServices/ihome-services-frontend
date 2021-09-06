@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Text,
@@ -10,16 +10,23 @@ import { Providers } from '../../components/Providers';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { styles } from './styles';
+export function Home({ navigation }) {
+  const [categoryId, setCategoryId] = useState('1');
 
-export function Home(){
+  const handleChangeCategory = (id) => {
+    setCategoryId(id);
+  }
+
   return (
     <SafeAreaView>
       <Text h1>Olá José!</Text>
       <Text h3>Escolha a categoria e selecione o profissional</Text>
-      <Categories />
+      <Categories handleChangeCategory={handleChangeCategory} />
       <Divider />
-      <Providers />
+      <Providers
+        categoryId={categoryId}
+        navigation={navigation}
+      />
     </SafeAreaView>
   );
 }

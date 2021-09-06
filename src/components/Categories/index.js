@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { FlatList } from 'react-native';
 import { CategoryItem } from '../CategoryItem';
@@ -18,7 +18,6 @@ const DATA = [
     }, {
         id: '3',
         name: 'Piscineiro',
-        // dont have the icon
         icon: 'grav'
     }, {
         id: '4',
@@ -38,19 +37,23 @@ const DATA = [
         icon: 'leaf'
     }
 ];
-export function Categories() {
+export function Categories({ handleChangeCategory }) {
     const [selectedId, setSelectedId] = useState('1');
 
-    const renderItem = ({item}) => (
-        <CategoryItem  
+    const renderItem = ({ item }) => (
+        <CategoryItem
             item={item}
-            onPress={() => setSelectedId(item.id)}
+            onPress={() => {
+                setSelectedId(item.id);
+                handleChangeCategory(item.id);
+            }
+            }
             selected={selectedId === item.id ? true : false} />
     );
 
     return (
-        <FlatList data={DATA} 
-            renderItem={renderItem} 
+        <FlatList data={DATA}
+            renderItem={renderItem}
             horizontal={true}
             keyExtractor={item => item.id}
             extraData={selectedId} />

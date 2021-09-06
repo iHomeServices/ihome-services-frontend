@@ -6,84 +6,91 @@ import { Card } from 'react-native-elements';
 import { ProviderItem } from '../ProviderItem';
 import { styles } from './styles';
 
+import { ProviderDetails } from '../../screens/ProviderDetails';
+
 
 const DATA = [
     {
         id: '1',
         name: 'Jose Rezende',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '1',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '2',
         name: 'Felipe Damasceno',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '1',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '3',
-        name: 'Felipe Damasceno',
+        name: 'André Ditomaso',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '2',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '4',
-        name: 'Felipe Damasceno',
+        name: 'Daniel Ramos',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '3',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '5',
-        name: 'Felipe Damasceno',
+        name: 'Gustavo Borges',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '1',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '6',
-        name: 'Felipe Damasceno',
+        name: 'Henrique Cardoso',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '2',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '7',
-        name: 'Felipe Damasceno',
+        name: 'João Ferreira',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '1',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '8',
-        name: 'Felipe Damasceno',
+        name: 'Gabriel Nunes',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '1',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '9',
-        name: 'Felipe Damasceno',
+        name: 'Bruno Tomaz',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '3',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, {
         id: '10',
-        name: 'Felipe Damasceno',
+        name: 'Alex Santos',
         price: 'R$30/hr',
-        category: 'Eletricista',
+        categoryId: '4',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }
 ];
-export function Providers() {
-    const renderProvider = (provider) => (
-        <ProviderItem provider={provider.item} />
-    );
+export function Providers({ categoryId, navigation }) {
+    const handleClickProvider = provider => navigation.navigate('ProviderDetails', {
+        provider: provider,
+    });
+
+    const renderProvider = (provider) => provider.item.categoryId === categoryId
+        && <ProviderItem
+            provider={provider.item}
+            handleClickProvider={handleClickProvider} />
 
     return (
         <FlatList data={DATA}
