@@ -3,11 +3,9 @@ import React from 'react';
 import { View, SafeAreaView, FlatList, ListItem, Text } from 'react-native';
 import { Card } from 'react-native-elements';
 
+import { ProviderDetails } from '../../screens/ProviderDetails';
 import { ProviderItem } from '../ProviderItem';
 import { styles } from './styles';
-
-import { ProviderDetails } from '../../screens/ProviderDetails';
-
 
 const DATA = [
     {
@@ -80,8 +78,25 @@ const DATA = [
         categoryId: '4',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
+    }, 
+    {
+        id: '11',
+        name: 'Alex Santos',
+        price: 'R$30/hr',
+        categoryId: '4',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
+    },
+    {
+        id: '12',
+        name: 'Alex Santos',
+        price: 'R$30/hr',
+        categoryId: '4',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
     }
 ];
+
 export function Providers({ categoryId, navigation }) {
     const handleClickProvider = provider => navigation.navigate('ProviderDetails', {
         provider: provider,

@@ -27,7 +27,10 @@ export function Login({ navigation }) {
                     </View>
 
                     <View style={styles.formGroup}>
-                        <Input label="Email" />
+                        <Input 
+                            label="Email"
+                            keyboardType='email-address'
+                            autoCompleteType='email' />
                         <Input 
                             label="Senha" 
                             secureTextEntry={true} />

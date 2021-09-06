@@ -61,10 +61,12 @@ export function Register({ navigation }) {
 
                     <View style={styles.formGroup}>
                         <Input label="Nome" />
-                        <Input label="Email" 
+                        <Input 
+                            label="Email" 
                             keyboardType="email-address"
                             autoCompleteType="email" />
-                        <Input label="Senha" 
+                        <Input 
+                            label="Senha" 
                             secureTextEntry={true} />
 
                         <View style={styles.row}>
@@ -78,7 +80,8 @@ export function Register({ navigation }) {
                             </View>
                         </View>
 
-                        <Input label="Endereço"
+                        <Input 
+                            label="Endereço"
                             autoCompleteType="street-address" />
                         <Input label="Bairro" />
                         

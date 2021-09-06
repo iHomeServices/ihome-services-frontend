@@ -15,7 +15,9 @@ export function Input({
             <Text style={styles.label}>{label}</Text>
             <TextInput 
                 style={styles.input}
+                autoCapitalize='none'
                 keyboardType={type}
+                autoCorrect={false}
                 {...props}
             />
         </View>

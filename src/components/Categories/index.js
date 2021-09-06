@@ -37,7 +37,7 @@ const DATA = [
         icon: 'leaf'
     }
 ];
-export function Categories({ handleChangeCategory }) {
+export function Categories({ handleChangeCategory, ...rest }) {
     const [selectedId, setSelectedId] = useState('1');
 
     const renderItem = ({ item }) => (
@@ -46,8 +46,7 @@ export function Categories({ handleChangeCategory }) {
             onPress={() => {
                 setSelectedId(item.id);
                 handleChangeCategory(item.id);
-            }
-            }
+            }}
             selected={selectedId === item.id ? true : false} />
     );
 
@@ -56,6 +55,8 @@ export function Categories({ handleChangeCategory }) {
             renderItem={renderItem}
             horizontal={true}
             keyExtractor={item => item.id}
-            extraData={selectedId} />
+            showsHorizontalScrollIndicator={false}
+            extraData={selectedId} 
+            {...rest} />
     );
 }
