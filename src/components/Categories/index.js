@@ -37,7 +37,8 @@ const DATA = [
         icon: 'leaf'
     }
 ];
-export function Categories({ handleChangeCategory, ...rest }) {
+
+export function Categories({ handleChangeCategory }) {
     const [selectedId, setSelectedId] = useState('1');
 
     const renderItem = ({ item }) => (
@@ -56,7 +57,6 @@ export function Categories({ handleChangeCategory, ...rest }) {
             horizontal={true}
             keyExtractor={item => item.id}
             showsHorizontalScrollIndicator={false}
-            extraData={selectedId} 
-            {...rest} />
+            extraData={selectedId} />
     );
 }

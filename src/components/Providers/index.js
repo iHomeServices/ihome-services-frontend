@@ -71,11 +71,12 @@ const DATA = [
         categoryId: '3',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
-    }, {
+    }, 
+    {
         id: '10',
         name: 'Alex Santos',
         price: 'R$30/hr',
-        categoryId: '4',
+        categoryId: '1',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     }, 
@@ -83,7 +84,7 @@ const DATA = [
         id: '11',
         name: 'Alex Santos',
         price: 'R$30/hr',
-        categoryId: '4',
+        categoryId: '1',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
     },
@@ -91,10 +92,43 @@ const DATA = [
         id: '12',
         name: 'Alex Santos',
         price: 'R$30/hr',
-        categoryId: '4',
+        categoryId: '1',
         rating: 4,
         imageUrl: '../../assets/fotoPerfil.jpg'
-    }
+    },
+    {
+        id: '13',
+        name: 'Alex Santos',
+        price: 'R$30/hr',
+        categoryId: '1',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
+    },
+    {
+        id: '14',
+        name: 'Alex Santos',
+        price: 'R$30/hr',
+        categoryId: '1',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
+    },
+    {
+        id: '15',
+        name: 'Alex Santos',
+        price: 'R$30/hr',
+        categoryId: '1',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
+    },
+    {
+        id: '16',
+        name: 'Alex Santos',
+        price: 'R$30/hr',
+        categoryId: '1',
+        rating: 4,
+        imageUrl: '../../assets/fotoPerfil.jpg'
+    },
+
 ];
 
 export function Providers({ categoryId, navigation }) {

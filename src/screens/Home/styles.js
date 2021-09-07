@@ -4,6 +4,7 @@ import { theme } from '../../global/styles/theme';
 export const styles = StyleSheet.create({
     container: {
         padding: theme.metrics.margin,
+        flex: 1
     },
     header: {
         flexDirection: 'row',
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
         height: 50,
         borderRadius: 25,
     },
-    flex: {
+    providerContainer: {
         flex: 1,
     },
     row: {

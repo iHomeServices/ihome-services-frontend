@@ -23,10 +23,7 @@ export function Home({ navigation }) {
   }
 
   return (
-    <SafeAreaView 
-    style={styles.container}
-    >
-
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Image 
           source={{ uri: 'https://github.com/FelipeSD.png' }}  
@@ -52,13 +49,12 @@ export function Home({ navigation }) {
         </Text>
       </View>
 
-      <Categories 
-        style={styles.categoriesContainer}
-        handleChangeCategory={handleChangeCategory} />
+      <View style={styles.categoriesContainer}>
+        <Categories 
+          handleChangeCategory={handleChangeCategory} />
+      </View>
 
-      <View 
-      // style={styles.flex}
-      >
+      <View style={styles.providerContainer}>
         <Providers
           categoryId={categoryId}
           navigation={navigation}

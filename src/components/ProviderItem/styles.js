@@ -2,11 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: 'flex-start',
-        textAlign: 'left',
-        marginVertical: 10,
+        flex: 1,
+        height: 200
     },
     avatar: {
         resizeMode: 'contain',
