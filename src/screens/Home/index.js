@@ -5,8 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import  MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+
 import  FeatherIcon from 'react-native-vector-icons/Feather';
 import { Categories } from '../../components/Categories';
 import { Providers } from '../../components/Providers';
@@ -27,7 +26,7 @@ export function Home({ navigation }) {
       <View style={styles.header}>
         <Image 
           source={{ uri: 'https://github.com/FelipeSD.png' }}  
-          style={styles.profilePhoto}
+          style={styles.avatar}
           PlaceholderContent={<ActivityIndicator />}/>
         <View style={styles.row}>
           <FeatherIcon 

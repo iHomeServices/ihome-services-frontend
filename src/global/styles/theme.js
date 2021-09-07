@@ -13,6 +13,8 @@ export const theme = {
         red: '#E83F67',
         green: '#6CC775',
         white: '#ffffff',
+
+        lightGray: '#F0F0F0'
     },
     metrics: {
         radius: 4,

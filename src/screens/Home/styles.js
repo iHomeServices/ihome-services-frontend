@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 30,
     },
-    profilePhoto: {
+    avatar: {
         width: 50, 
         height: 50,
         borderRadius: 25,
