@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Text } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { theme } from '../../global/styles/theme';
 
 import { styles } from './styles';

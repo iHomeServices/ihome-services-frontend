@@ -18,24 +18,16 @@ const DATA = [
     }, {
         id: '3',
         name: 'Piscineiro',
-        icon: 'grav'
+        icon: 'pool'
     }, {
         id: '4',
         name: 'Pintor',
-        icon: 'paint-brush'
+        icon: 'format-paint'
     }, {
         id: '5',
         name: 'Jardineiro',
         icon: 'leaf'
-    }, {
-        id: '6',
-        name: 'Jardineiro',
-        icon: 'leaf'
-    }, {
-        id: '7',
-        name: 'Jardineiro',
-        icon: 'leaf'
-    }
+    },
 ];
 
 export function Categories({ handleChangeCategory }) {

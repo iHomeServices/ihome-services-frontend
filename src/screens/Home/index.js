@@ -24,10 +24,15 @@ export function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Image 
-          source={{ uri: 'https://github.com/FelipeSD.png' }}  
-          style={styles.avatar}
-          PlaceholderContent={<ActivityIndicator />}/>
+        <View style={styles.row}>
+          <Image 
+            source={{ uri: 'https://github.com/FelipeSD.png' }}  
+            style={styles.avatar}
+            PlaceholderContent={<ActivityIndicator />}/>
+
+          {/* <Text>Olá, José</Text> */}
+        </View>
+
         <View style={styles.row}>
           <FeatherIcon 
             style={styles.pr10}
@@ -39,14 +44,14 @@ export function Home({ navigation }) {
         </View>
       </View>
 
-      <View style={styles.greetings}>
+      {/* <View style={styles.greetings}>
         <Text style={styles.text1}>
           Olá José!
         </Text>
         <Text style={styles.text2}>
           Comece a cuidar de sua casa
         </Text>
-      </View>
+      </View> */}
 
       <View style={styles.categoriesContainer}>
         <Categories 
