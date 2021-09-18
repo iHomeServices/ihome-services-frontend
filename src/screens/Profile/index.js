@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FullLogo from '../../assets/full_logo.svg';
 import { ScrollView, Text, View, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,21 +11,20 @@ import { DATA } from '../../components/Providers';
 
 export function Profile({ route, navigation }) {
     const userId = route.params.userId;
-    const loggedUser = getLoggedUser();
+    const [user, setUser] = useState();
 
-    const getLoggedUser = () => {
-        const loggedUser = DATA.find(provider => provider.id === JSON.stringify(userId));
-        return loggedUser;
-    }
+    useEffect(() => {
+        setUser(DATA.find(provider => provider.id === userId));
+    }, [user]);
 
     return (
         <SafeAreaView>
             <ScrollView>
                 <View>
-                    <Text>{loggedUser.name}</Text>
+                    <Text>{user && user.name}</Text>
                 </View>
                 <View>
-                    <Text>{loggedUser.price}</Text>
+                    <Text>{user && user.price}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>

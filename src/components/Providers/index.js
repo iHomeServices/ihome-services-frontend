@@ -133,7 +133,7 @@ export const DATA = [
 
 export function Providers({ categoryId, navigation }) {
     const handleClickProvider = provider => navigation.navigate('ProviderDetails', {
-        provider: provider
+        providerId: provider.item.id
     });
 
     const renderProvider = provider => provider.item.categoryId === categoryId
