@@ -7,7 +7,7 @@ import { ProviderDetails } from '../../screens/ProviderDetails';
 import { ProviderItem } from '../ProviderItem';
 import { styles } from './styles';
 
-const DATA = [
+export const DATA = [
     {
         id: '1',
         name: 'Jose Rezende',
@@ -133,13 +133,13 @@ const DATA = [
 
 export function Providers({ categoryId, navigation }) {
     const handleClickProvider = provider => navigation.navigate('ProviderDetails', {
-        provider: provider,
+        provider: provider
     });
 
-    const renderProvider = (provider) => provider.item.categoryId === categoryId
+    const renderProvider = provider => provider.item.categoryId === categoryId
         && <ProviderItem
             provider={provider.item}
-            handleClickProvider={handleClickProvider} />
+            handleClickProvider={() => handleClickProvider(provider)} />
 
     return (
         <FlatList data={DATA}

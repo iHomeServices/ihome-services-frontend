@@ -52,8 +52,8 @@ export function ProviderItem({ provider, handleClickProvider }) {
             <RectButton style={styles.favoriteButton}>
                 <MaterialCommunityIcon 
                     style={styles.favoriteIcon} 
-                    size={20}
-                    name="heart-outline" />
+                    size={25}
+                    name="star-outline" />
             </RectButton>
         </View>
     );

@@ -83,6 +83,6 @@ export const styles = StyleSheet.create({
         elevation: 5,
     },
     favoriteIcon: {
-        color: theme.colors.red,
+        color: theme.colors.yellow,
     }
 });

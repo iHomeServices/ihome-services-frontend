@@ -15,6 +15,7 @@ import { Login } from './src/screens/Login';
 import { Home } from './src/screens/Home';
 import { Register } from './src/screens/Register';
 import { ProviderDetails } from './src/screens/ProviderDetails';
+import { Profile } from './src/screens/Profile';
 
 export default function App() {
   // carregamento de fontes
@@ -38,6 +39,7 @@ export default function App() {
           <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="ProviderDetails" component={ProviderDetails} options={{ headerShown: false }} />
+          <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

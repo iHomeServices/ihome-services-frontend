@@ -1,13 +1,20 @@
 import React from 'react';
 import FullLogo from '../../assets/full_logo.svg';
-import {ScrollView, Text, View, Button} from 'react-native';
+import { ScrollView, Text, View, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import {styles} from './styles';
+import { styles } from './styles';
 import { FluidButton } from '../../components/FluidButton';
 import { Input } from '../../components/Input';
 
 export function Login({ navigation }) {
+
+    const handleLoginClick = () => {
+        navigation.navigate('Home', {
+            userId: '2'
+        })
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
@@ -27,17 +34,17 @@ export function Login({ navigation }) {
                     </View>
 
                     <View style={styles.formGroup}>
-                        <Input 
+                        <Input
                             label="Email"
                             keyboardType='email-address'
                             autoCompleteType='email' />
-                        <Input 
-                            label="Senha" 
+                        <Input
+                            label="Senha"
                             secureTextEntry={true} />
                     </View>
 
-                    <FluidButton 
-                        onPress={() => navigation.navigate('Home')}
+                    <FluidButton
+                        onPress={handleLoginClick}
                         text="LOGIN" />
 
                     <View style={styles.footer}>
@@ -45,7 +52,7 @@ export function Login({ navigation }) {
                             Criar uma nova conta
                         </Text>
                     </View>
-                </View>            
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
