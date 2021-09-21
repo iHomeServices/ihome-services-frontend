@@ -102,7 +102,9 @@ export function Register({ navigation }) {
                     </View>
 
                     <FluidButton 
-                        onPress={() => navigation.navigate('Home')}
+                        onPress={() => navigation.navigate('Home', {
+                            userId: '2'
+                        })}
                         text="CADASTRAR" />
 
                     <View style={styles.footer}>

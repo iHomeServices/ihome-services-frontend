@@ -1,3 +1,8 @@
+import { Dimensions } from "react-native";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 export const theme = {
     colors: {
         primary: '#46D0D9',
@@ -22,6 +27,8 @@ export const theme = {
         border: 1,
         padding: 8,
         margin: 15,
+        screenWidth: windowWidth < windowHeight ? windowWidth : windowHeight,
+        screenHeight: windowWidth < windowHeight ? windowHeight : windowWidth,
     },
     fonts: {
         text500: 'Rubik_500Medium',

@@ -38,8 +38,6 @@ export function Home({ route, navigation }) {
             style={styles.avatar}
             onPress={handleProfileClick}
             PlaceholderContent={<ActivityIndicator />} />
-
-          {/* <Text>Olá, José</Text> */}
         </View>
 
         <View style={styles.row}>
@@ -52,15 +50,6 @@ export function Home({ route, navigation }) {
             name={"settings"} />
         </View>
       </View>
-
-      {/* <View style={styles.greetings}>
-        <Text style={styles.text1}>
-          Olá José!
-        </Text>
-        <Text style={styles.text2}>
-          Comece a cuidar de sua casa
-        </Text>
-      </View> */}
 
       <View style={styles.categoriesContainer}>
         <Categories

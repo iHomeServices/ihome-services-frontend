@@ -3,6 +3,7 @@ import { theme } from '../../global/styles/theme';
 
 export const styles = StyleSheet.create({
     container: {
+        backgroundColor: theme.colors.background,
         padding: theme.metrics.margin,
         flex: 1
     },
@@ -10,7 +11,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 30,
+        marginBottom: 20,
     },
     avatar: {
         width: 50, 
@@ -26,21 +27,7 @@ export const styles = StyleSheet.create({
     pr10: {
         paddingRight: 20,
     },
-    greetings: {
-        marginBottom: 30,
-    },
-    text1: {
-        fontFamily: theme.fonts.text300,
-        color: theme.colors.text3,
-        fontSize: 20,
-    },
-    text2: {
-        fontFamily: theme.fonts.text400,
-        color: theme.colors.heading,
-        lineHeight: 24,
-        fontSize: 20,
-    },
     categoriesContainer: {
-        marginBottom: 30,
+        marginBottom: 20,
     }
 });

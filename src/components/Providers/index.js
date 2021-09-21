@@ -1,11 +1,8 @@
 import React from 'react';
 
-import { View, SafeAreaView, FlatList, ListItem, Text } from 'react-native';
-import { Card } from 'react-native-elements';
+import { FlatList } from 'react-native';
 
-import { ProviderDetails } from '../../screens/ProviderDetails';
 import { ProviderItem } from '../ProviderItem';
-import { styles } from './styles';
 
 export const DATA = [
     {
