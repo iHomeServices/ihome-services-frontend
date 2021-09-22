@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View, Button, ActivityIndicator } from 'react-native';
+import { ScrollView, Text, View, Button, ActivityIndicator, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './styles';
@@ -7,6 +7,7 @@ import { DATA } from '../../components/Providers';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { Image } from 'react-native-elements';
 import { theme } from '../../global/styles/theme';
+import { RoundButton } from '../../components/RoundButton';
 
 export function ProviderDetails({ route, navigation }) {
     const providerId = route.params.providerId;
@@ -35,67 +36,66 @@ export function ProviderDetails({ route, navigation }) {
             <Pagination
                 dotsLength={entries.length}
                 activeDotIndex={activeSlide}
-                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
-                dotStyle={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: 4,
-                    backgroundColor: 'rgba(255, 255, 255, 0.92)'
-                }}
-                inactiveDotStyle={{
-                    // Define styles for inactive dots here
-                }}
-                inactiveDotOpacity={0.4}
-                inactiveDotScale={0.6}
+                containerStyle={styles.dotContainer}
+                dotStyle={[styles.dotStructure, styles.dotPrimary]}
+                inactiveDotStyle={[styles.dotStructure, styles.dotInactive]}
+                inactiveDotOpacity={1}
+                inactiveDotScale={1}
             />
         );
     }
 
-    const ImageItem = ({data}) => {
-        const {item, index} = data;
+    const CarouselItem = ({data}) => {
+        const {item} = data;
 
         return (
-            <View style={{
-                width: theme.metrics.screenWidth,
-                flex: 1,
-                backgroundColor: "#000",
-                flexDirection: "row", flexWrap: "wrap",
-                height: 200
-              }}>
-                <Image
-                    style={{ 
-                        flex: 1,
-                        width: theme.metrics.screenWidth
-                    }}
-                    source={{ 
-                        // uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc9LHKKyy726fcel7Ow7yARwRtu27qxMTQSQ&usqp=CAU" 
-                        uri: item.illustration
-                    }}
-                    PlaceholderContent={<ActivityIndicator />} 
-                />
+            <View style={styles.carouselItemContainer}>
+                <Image style={styles.carouselItemImage} source={{uri: item.illustration}} />
             </View>
         )
     }
 
     return (
-        <View>
-            <View style={{height: 300}}>
+        <View style={styles.container}>
+            <StatusBar
+                animated={true}
+                backgroundColor="transparent"
+                translucent={true}
+                barStyle={'light-content'}
+                showHideTransition={'none'} />
+
+            <View style={styles.carouselContainer}>
+                <View style={styles.carouselTopBarContainer}>
+                    <View style={styles.carouselControlRow}>
+                        <RoundButton
+                            iconName="keyboard-arrow-left"
+                            iconColor={theme.colors.dark}
+                            onPress={() => navigation.goBack()}
+                        />
+                        <RoundButton
+                            iconName="star-outline"
+                            iconColor={theme.colors.yellow}
+                            onPress={() => {}}
+                        />
+                    </View>
+                </View>
+
                 <Carousel
                     data={entries}
-                    renderItem={(item) => <ImageItem data={item} />}
-                    onSnapToItem={(index) => setActiveSlide(index) }
                     sliderWidth={theme.metrics.screenWidth}
                     itemWidth={theme.metrics.screenWidth}
-                    containerCustomStyle={{
-                        backgroundColor: theme.colors.background,
-                        flex: 1
-                    }}
+                    renderItem={(item) => <CarouselItem data={item} />}
+                    onSnapToItem={(index) => setActiveSlide(index) }
                 />
                 <Dots />
             </View>
-            <View>
+            <View style={{
+                backgroundColor: theme.colors.primary,
+                
+            }}>
 
             </View>
+
             {/* <ScrollView>
                 <View>
                     <Text>{provider && provider.name}</Text>

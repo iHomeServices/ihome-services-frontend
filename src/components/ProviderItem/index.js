@@ -12,6 +12,7 @@ import { RectButton, TouchableWithoutFeedback } from 'react-native-gesture-handl
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { Image } from 'react-native-elements/dist/image/Image';
+import { RoundButton } from '../RoundButton';
 
 export function ProviderItem({ provider, handleClickProvider }) {
     return (
@@ -49,12 +50,11 @@ export function ProviderItem({ provider, handleClickProvider }) {
                 </View>
             </TouchableWithoutFeedback>
 
-            <RectButton style={styles.favoriteButton}>
-                <MaterialCommunityIcon 
-                    style={styles.favoriteIcon} 
-                    size={25}
-                    name="star-outline" />
-            </RectButton>
+            <View style={styles.favoriteButton}>
+                <RoundButton 
+                    iconColor={theme.colors.yellow} 
+                    iconName="star-outline" />
+            </View>
         </View>
     );
 }
