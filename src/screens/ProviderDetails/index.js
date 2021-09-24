@@ -8,6 +8,7 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { Image } from 'react-native-elements';
 import { theme } from '../../global/styles/theme';
 import { RoundButton } from '../../components/RoundButton';
+import { FluidButton } from '../../components/FluidButton';
 
 export function ProviderDetails({ route, navigation }) {
     const providerId = route.params.providerId;
@@ -50,7 +51,9 @@ export function ProviderDetails({ route, navigation }) {
 
         return (
             <View style={styles.carouselItemContainer}>
-                <Image style={styles.carouselItemImage} source={{uri: item.illustration}} />
+                <Image 
+                    style={styles.carouselItemImage} 
+                    source={{uri: item.illustration}} />
             </View>
         )
     }
@@ -87,23 +90,27 @@ export function ProviderDetails({ route, navigation }) {
                     renderItem={(item) => <CarouselItem data={item} />}
                     onSnapToItem={(index) => setActiveSlide(index) }
                 />
+            </View>
+            
+            <ScrollView style={styles.contentContainer}>
                 <Dots />
-            </View>
-            <View style={{
-                backgroundColor: theme.colors.primary,
-                
-            }}>
+                <SafeAreaView style={styles.detailsContainer}>
+                    <View style={styles.row}>
+                        <Text style={styles.heading}>{provider && provider.name}</Text>
+                        <Image
+                            source={{ uri: 'https://github.com/FelipeSD.png' }}
+                            style={styles.avatar}
+                            PlaceholderContent={<ActivityIndicator />} />
+                    </View>
+                </SafeAreaView>
+            </ScrollView>
 
+            <View style={styles.footer}>
+                <Text style={styles.heading}>{provider && provider.price}</Text>
+                <View style={{width: '60%'}}>
+                    <FluidButton text={"Contratar"} />
+                </View>
             </View>
-
-            {/* <ScrollView>
-                <View>
-                    <Text>{provider && provider.name}</Text>
-                </View>
-                <View>
-                    <Text>{provider && provider.price}</Text>
-                </View>
-            </ScrollView> */}
         </View>
     );
 }
