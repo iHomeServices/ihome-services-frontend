@@ -9,6 +9,7 @@ import { Image } from 'react-native-elements';
 import { theme } from '../../global/styles/theme';
 import { RoundButton } from '../../components/RoundButton';
 import { FluidButton } from '../../components/FluidButton';
+import { HeaderProfile } from '../../components/HeaderProfile';
 
 export function ProviderDetails({ route, navigation }) {
     const providerId = route.params.providerId;
@@ -31,20 +32,6 @@ export function ProviderDetails({ route, navigation }) {
     useEffect(() => {
         setProvider(DATA.find(provider => provider.id === providerId));
     }, [provider]);
-
-    const Dots = () => {
-        return (
-            <Pagination
-                dotsLength={entries.length}
-                activeDotIndex={activeSlide}
-                containerStyle={styles.dotContainer}
-                dotStyle={[styles.dotStructure, styles.dotPrimary]}
-                inactiveDotStyle={[styles.dotStructure, styles.dotInactive]}
-                inactiveDotOpacity={1}
-                inactiveDotScale={1}
-            />
-        );
-    }
 
     const CarouselItem = ({data}) => {
         const {item} = data;
@@ -83,30 +70,37 @@ export function ProviderDetails({ route, navigation }) {
                     </View>
                 </View>
 
-                <Carousel
-                    data={entries}
-                    sliderWidth={theme.metrics.screenWidth}
-                    itemWidth={theme.metrics.screenWidth}
-                    renderItem={(item) => <CarouselItem data={item} />}
-                    onSnapToItem={(index) => setActiveSlide(index) }
+                <View style={styles.wh100}>
+                    <Carousel
+                        data={entries}
+                        sliderWidth={theme.metrics.screenWidth}
+                        itemWidth={theme.metrics.screenWidth}
+                        renderItem={(item) => <CarouselItem data={item} />}
+                        onSnapToItem={(index) => setActiveSlide(index) }
+                        
+                    />
+                </View>
+                <Pagination
+                    dotsLength={entries.length}
+                    activeDotIndex={activeSlide}
+                    containerStyle={styles.dotContainer}
+                    dotStyle={[styles.dotStructure, styles.dotPrimary]}
+                    inactiveDotStyle={[styles.dotStructure, styles.dotInactive]}
+                    inactiveDotOpacity={1}
+                    inactiveDotScale={1}
                 />
             </View>
             
-            <ScrollView style={styles.contentContainer}>
-                <Dots />
-                <SafeAreaView style={styles.detailsContainer}>
-                    <View style={styles.row}>
-                        <Text style={styles.heading}>{provider && provider.name}</Text>
-                        <Image
-                            source={{ uri: 'https://github.com/FelipeSD.png' }}
-                            style={styles.avatar}
-                            PlaceholderContent={<ActivityIndicator />} />
-                    </View>
-                </SafeAreaView>
-            </ScrollView>
+            <View style={styles.contentContainer}>
+                <View style={styles.detailsContainer}>
+                    <HeaderProfile provider={provider} />
+                </View>
+            </View>
 
             <View style={styles.footer}>
-                <Text style={styles.heading}>{provider && provider.price}</Text>
+                <Text style={styles.heading}>
+                    {provider && provider.price}
+                </Text>
                 <View style={{width: '60%'}}>
                     <FluidButton text={"Contratar"} />
                 </View>
