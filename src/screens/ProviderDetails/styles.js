@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     carouselItemContainer: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: theme.colors.background,
+        backgroundColor: theme.colors.dark,
     },
     carouselItemImage: {
         flex: 1,
@@ -66,6 +66,7 @@ export const styles = StyleSheet.create({
         marginTop: 200
     },
     detailsContainer: {
+        flex: 1,
         backgroundColor: theme.colors.background,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,

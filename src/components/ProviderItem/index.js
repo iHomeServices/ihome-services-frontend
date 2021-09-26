@@ -5,9 +5,8 @@ import {
     Text,
     ActivityIndicator,
 } from 'react-native';
-import  MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Rating } from 'react-native-elements';
-import { RectButton, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';

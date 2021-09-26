@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View, Button, ActivityIndicator, StatusBar } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView, Text, View, StatusBar } from 'react-native';
+import  Feather from 'react-native-vector-icons/Feather';
 
 import { styles } from './styles';
 import { DATA } from '../../components/Providers';
@@ -10,6 +10,7 @@ import { theme } from '../../global/styles/theme';
 import { RoundButton } from '../../components/RoundButton';
 import { FluidButton } from '../../components/FluidButton';
 import { HeaderProfile } from '../../components/HeaderProfile';
+import { Description } from '../../components/Description';
 
 export function ProviderDetails({ route, navigation }) {
     const providerId = route.params.providerId;
@@ -38,9 +39,7 @@ export function ProviderDetails({ route, navigation }) {
 
         return (
             <View style={styles.carouselItemContainer}>
-                <Image 
-                    style={styles.carouselItemImage} 
-                    source={{uri: item.illustration}} />
+                <Image style={styles.carouselItemImage} source={{uri: item.illustration}} />
             </View>
         )
     }
@@ -77,7 +76,6 @@ export function ProviderDetails({ route, navigation }) {
                         itemWidth={theme.metrics.screenWidth}
                         renderItem={(item) => <CarouselItem data={item} />}
                         onSnapToItem={(index) => setActiveSlide(index) }
-                        
                     />
                 </View>
                 <Pagination
@@ -94,6 +92,48 @@ export function ProviderDetails({ route, navigation }) {
             <View style={styles.contentContainer}>
                 <View style={styles.detailsContainer}>
                     <HeaderProfile provider={provider} />
+
+                    <View style={{
+                        marginVertical: 30,
+                        marginRight: -30,
+                        marginLeft: -30,
+
+                        paddingHorizontal: 30,
+                        paddingVertical: 15,
+                        
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+
+                        borderColor: theme.colors.lightGray,
+
+                        borderTopWidth: 3,
+                        borderBottomWidth: 3,
+                    }}>
+                        <View style={{alignItems: 'center',}}>
+                            <Feather 
+                                style={[styles.icon]}
+                                name="info" 
+                                size={32} />
+                            <Text style={styles.title}>Informação</Text>
+                        </View>
+                        <View style={{alignItems: 'center',}}>
+                            <Feather 
+                                style={styles.icon}
+                                name="message-square" 
+                                size={32} />
+                            <Text style={styles.title}>Comentários</Text>
+                        </View>
+                        <View style={{alignItems: 'center',}}>
+                            <Feather 
+                                style={styles.icon}
+                                name="share-2" 
+                                size={32} />
+                            <Text style={styles.title}>Compartilhar</Text>
+                        </View>
+                    </View>
+
+                    <Description />
                 </View>
             </View>
 
