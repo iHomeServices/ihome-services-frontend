@@ -3,25 +3,49 @@ import { Dimensions } from "react-native";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+
+const colorsLight = {
+    primary: '#46D0D9',
+    secondary: '#13497B',
+    background: '#F8FBFF',
+    
+    heading: '#143656',
+    
+    text: '#000000',
+    text2: '#D3DBE2',
+    text3: '#B2B2B2',
+
+    red: '#E83F67',
+    green: '#6CC775',
+    white: '#ffffff',
+    dark: '#000000',
+    yellow: '#ffd300',
+
+    lightGray: '#F0F0F0'
+}
+
+const colorsDark = {
+    primary: '#5088D9',
+    secondary: '#E2E8F0',
+    background: '#171923',
+    
+    heading: '#eceded',
+    
+    text: '#eceded',
+    text2: '#A0AEC0',
+    text3: '#878a91',
+
+    green: '#6CC775',
+    white: '#2d3748',
+    dark: '#878a91',
+    yellow: '#ffd300',
+
+    lightGray: '#eceded',
+}
+
 export const theme = {
     colors: {
-        primary: '#46D0D9',
-        secondary: '#13497B',
-        background: '#F8FBFF',
-        
-        heading: '#143656',
-        
-        text: '#000000',
-        text2: '#D3DBE2',
-        text3: '#B2B2B2',
-
-        red: '#E83F67',
-        green: '#6CC775',
-        white: '#ffffff',
-        dark: '#000000',
-        yellow: '#ffd300',
-
-        lightGray: '#F0F0F0'
+        ...colorsLight
     },
     metrics: {
         radius: 4,

@@ -30,6 +30,6 @@ export const styles = StyleSheet.create({
         backgroundColor: theme.colors.primary,
     },
     textWhite: {
-        color: theme.colors.white,
+        color: '#fff',
     }
 });

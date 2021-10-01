@@ -13,6 +13,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     
+    w60: {
+        width: '60%',
+    },
     wh100: {
         width: '100%',
         height: '100%'

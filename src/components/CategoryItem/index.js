@@ -15,7 +15,7 @@ export function CategoryItem({ item, onPress, selected }) {
             onPress={onPress}>
             <Icon name={item.icon}
                 size={35}
-                color={selected ? theme.colors.white : theme.colors.text2} />
+                color={selected ? '#fff': theme.colors.text2} />
                 
             <Text style={[styles.name, selected ? styles.textWhite : '']}>
                 {item.name}

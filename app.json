@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ihome-services-frontend",
-    "slug": "ihome-services-frontend",
+    "name": "iHomeServices",
+    "slug": "iHomeServices",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,11 +23,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#46D0D9"
-      }
+      },
+      "package": "com.iHomeServices"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Aplicativo para encontrar profissionais e publicar serviços"
   }
 }

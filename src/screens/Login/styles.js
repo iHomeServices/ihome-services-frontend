@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: theme.fonts.text300,
         textAlign: 'center',
+        color: theme.colors.dark,
     },
 
     boldText: {

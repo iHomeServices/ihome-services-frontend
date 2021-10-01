@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View, StatusBar } from 'react-native';
-import  Feather from 'react-native-vector-icons/Feather';
 
 import { styles } from './styles';
 import { DATA } from '../../components/Providers';
@@ -10,7 +9,7 @@ import { theme } from '../../global/styles/theme';
 import { RoundButton } from '../../components/RoundButton';
 import { FluidButton } from '../../components/FluidButton';
 import { HeaderProfile } from '../../components/HeaderProfile';
-import { Description } from '../../components/Description';
+import { DetailOptions } from '../../components/DetailOptions';
 
 export function ProviderDetails({ route, navigation }) {
     const providerId = route.params.providerId;
@@ -34,20 +33,9 @@ export function ProviderDetails({ route, navigation }) {
         setProvider(DATA.find(provider => provider.id === providerId));
     }, [provider]);
 
-    const CarouselItem = ({data}) => {
-        const {item} = data;
-
-        return (
-            <View style={styles.carouselItemContainer}>
-                <Image style={styles.carouselItemImage} source={{uri: item.illustration}} />
-            </View>
-        )
-    }
-
     return (
         <View style={styles.container}>
             <StatusBar
-                animated={true}
                 backgroundColor="transparent"
                 translucent={true}
                 barStyle={'light-content'}
@@ -74,7 +62,15 @@ export function ProviderDetails({ route, navigation }) {
                         data={entries}
                         sliderWidth={theme.metrics.screenWidth}
                         itemWidth={theme.metrics.screenWidth}
-                        renderItem={(item) => <CarouselItem data={item} />}
+                        renderItem={(data) => {
+                            return (
+                                <View style={styles.carouselItemContainer}>
+                                    <Image 
+                                        style={styles.carouselItemImage} 
+                                        source={{uri: data.item.illustration}} />
+                                </View>
+                            )
+                        }}
                         onSnapToItem={(index) => setActiveSlide(index) }
                     />
                 </View>
@@ -92,48 +88,7 @@ export function ProviderDetails({ route, navigation }) {
             <View style={styles.contentContainer}>
                 <View style={styles.detailsContainer}>
                     <HeaderProfile provider={provider} />
-
-                    <View style={{
-                        marginVertical: 30,
-                        marginRight: -30,
-                        marginLeft: -30,
-
-                        paddingHorizontal: 30,
-                        paddingVertical: 15,
-                        
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-
-                        borderColor: theme.colors.lightGray,
-
-                        borderTopWidth: 3,
-                        borderBottomWidth: 3,
-                    }}>
-                        <View style={{alignItems: 'center',}}>
-                            <Feather 
-                                style={[styles.icon]}
-                                name="info" 
-                                size={32} />
-                            <Text style={styles.title}>Informação</Text>
-                        </View>
-                        <View style={{alignItems: 'center',}}>
-                            <Feather 
-                                style={styles.icon}
-                                name="message-square" 
-                                size={32} />
-                            <Text style={styles.title}>Comentários</Text>
-                        </View>
-                        <View style={{alignItems: 'center',}}>
-                            <Feather 
-                                style={styles.icon}
-                                name="share-2" 
-                                size={32} />
-                            <Text style={styles.title}>Compartilhar</Text>
-                        </View>
-                    </View>
-
-                    <Description />
+                    <DetailOptions />
                 </View>
             </View>
 
@@ -141,7 +96,7 @@ export function ProviderDetails({ route, navigation }) {
                 <Text style={styles.heading}>
                     {provider && provider.price}
                 </Text>
-                <View style={{width: '60%'}}>
+                <View style={styles.w60}>
                     <FluidButton text={"Contratar"} />
                 </View>
             </View>

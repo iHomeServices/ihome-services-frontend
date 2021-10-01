@@ -11,9 +11,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     avatar: {
-        width: 60, 
-        height: 60,
-        borderRadius: 30,
+        width: 80, 
+        height: 80,
+        borderRadius: 40,
     },
     heading: {
         fontFamily: theme.fonts.text500,
