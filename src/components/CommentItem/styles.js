@@ -22,5 +22,6 @@ export const styles = StyleSheet.create({
     comment: {
         fontFamily: theme.fonts.text300,
         marginVertical: 10,
+        color: theme.colors.text,
     }
 });

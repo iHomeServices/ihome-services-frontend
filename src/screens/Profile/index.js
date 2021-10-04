@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import FullLogo from '../../assets/full_logo.svg';
-import { ScrollView, Text, View, Button } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-// import { styles } from './styles';
-import { FluidButton } from '../../components/FluidButton';
-import { Input } from '../../components/Input';
+import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { DATA } from '../../components/Providers';
+import { HeaderProfile } from '../../components/HeaderProfile';
+import { RoundButton } from '../../components/RoundButton';
 
 export function Profile({ route, navigation }) {
     const userId = route.params.userId;
@@ -18,15 +17,25 @@ export function Profile({ route, navigation }) {
     }, [user]);
 
     return (
-        <SafeAreaView>
-            <ScrollView>
-                <View>
-                    <Text>{user && user.name}</Text>
+        <SafeAreaView style={styles.container} >
+            <View style={styles.header}>
+                <RoundButton 
+                    iconName="keyboard-arrow-left"
+                    iconColor={theme.colors.dark}
+                    iconSize={35}
+                    onPress={() => navigation.goBack()}
+                    noShadow
+                />
+                <View style={styles.profile}>
+                    <HeaderProfile provider={user} />
                 </View>
-                <View>
-                    <Text>{user && user.price}</Text>
-                </View>
-            </ScrollView>
+            </View>
+
+            <View style={styles.contentContainer}>
+                <ScrollView style={styles.content}>
+
+                </ScrollView>
+            </View>                
         </SafeAreaView>
     );
 }

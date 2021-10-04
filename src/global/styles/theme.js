@@ -45,7 +45,7 @@ const colorsDark = {
 
 export const theme = {
     colors: {
-        ...colorsLight
+        ...colorsDark
     },
     metrics: {
         radius: 4,
