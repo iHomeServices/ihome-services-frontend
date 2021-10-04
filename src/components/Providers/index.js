@@ -128,7 +128,7 @@ export const DATA = [
 
 ];
 
-export function Providers({ categoryId, navigation }) {
+export function Providers({ categoryId, providers, navigation }) {
     const handleClickProvider = provider => navigation.navigate('ProviderDetails', {
         providerId: provider.item.id
     });
@@ -139,7 +139,7 @@ export function Providers({ categoryId, navigation }) {
             handleClickProvider={() => handleClickProvider(provider)} />
 
     return (
-        <FlatList data={DATA}
+        <FlatList data={providers}
             renderItem={renderProvider}
             keyExtractor={provider => provider.id} />
     );

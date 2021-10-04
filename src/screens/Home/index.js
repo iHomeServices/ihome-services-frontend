@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   ActivityIndicator,
@@ -14,9 +14,12 @@ import { Image } from 'react-native-elements/dist/image/Image';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
+import backendAPI from '../../api/backend';
 
 export function Home({ route, navigation }) {
   const [categoryId, setCategoryId] = useState('1');
+  const [providers, setProviders] = useState([]);
+  const [categories, setCategories] = useState([]);
   const userId = route.params.userId;
 
   const handleChangeCategory = (id) => {
@@ -28,6 +31,35 @@ export function Home({ route, navigation }) {
       userId: userId
     });
   }
+
+  async function getCategories() {
+    console.log("aaa");
+    try {
+      let categories = await backendAPI.get('/category');
+      console.log("categories", categories);
+      setCategories(categories);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getProviders() {
+    console.log("bbb");
+    try {
+      let providers = await backendAPI.get('provider');
+      console.log("providers", providers);
+      setProviders(providers);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    console.log("useee");
+    // getCategories();
+
+    getProviders();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,12 +87,14 @@ export function Home({ route, navigation }) {
 
       <View style={styles.categoriesContainer}>
         <Categories
+          categories={categories}
           handleChangeCategory={handleChangeCategory} />
       </View>
 
       <View style={styles.providerContainer}>
         <Providers
           categoryId={categoryId}
+          providers={providers}
           navigation={navigation}
         />
       </View>

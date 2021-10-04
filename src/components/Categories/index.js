@@ -30,7 +30,7 @@ const DATA = [
     },
 ];
 
-export function Categories({ handleChangeCategory }) {
+export function Categories({ categories, handleChangeCategory }) {
     const [selectedId, setSelectedId] = useState('1');
 
     const renderItem = ({ item }) => (
@@ -44,7 +44,7 @@ export function Categories({ handleChangeCategory }) {
     );
 
     return (
-        <FlatList data={DATA}
+        <FlatList data={categories}
             renderItem={renderItem}
             horizontal={true}
             keyExtractor={item => item.id}
