@@ -17,13 +17,14 @@ import { theme } from '../../global/styles/theme';
 import backendAPI from '../../api/backend';
 
 export function Home({ route, navigation }) {
-  const [categoryId, setCategoryId] = useState('1');
+  const [categoryId, setCategoryId] = useState(1);
   const [providers, setProviders] = useState([]);
   const [categories, setCategories] = useState([]);
   const userId = route.params.userId;
 
   const handleChangeCategory = (id) => {
     setCategoryId(id);
+    console.log(providers)
   }
 
   const handleProfileClick = () => {
@@ -33,30 +34,26 @@ export function Home({ route, navigation }) {
   }
 
   async function getCategories() {
-    console.log("aaa");
     try {
       let categories = await backendAPI.get('/category');
-      console.log("categories", categories);
-      setCategories(categories);
+      setCategories(categories.data);
     } catch (error) {
       console.log(error);
     }
   }
 
   async function getProviders() {
-    console.log("bbb");
     try {
       let providers = await backendAPI.get('provider');
-      console.log("providers", providers);
-      setProviders(providers);
+      // console.log("providers", providers);
+      setProviders(providers.data);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    console.log("useee");
-    // getCategories();
+    getCategories();
 
     getProviders();
   }, []);

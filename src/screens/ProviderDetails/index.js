@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View, StatusBar } from 'react-native';
+import { ScrollView, Text, View, StatusBar, Linking } from 'react-native';
 
 import { styles } from './styles';
-import { DATA } from '../../components/Providers';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { Image } from 'react-native-elements';
 import { theme } from '../../global/styles/theme';
@@ -10,6 +9,7 @@ import { RoundButton } from '../../components/RoundButton';
 import { FluidButton } from '../../components/FluidButton';
 import { HeaderProfile } from '../../components/HeaderProfile';
 import { DetailOptions } from '../../components/DetailOptions';
+import backendAPI from '../../api/backend';
 
 export function ProviderDetails({ route, navigation }) {
     const providerId = route.params.providerId;
@@ -18,20 +18,36 @@ export function ProviderDetails({ route, navigation }) {
 
     const entries = [
         {
-            title: 'First item',
-            subtitle: 'Subtitle',
             illustration: 'https://i.imgur.com/UYiroysl.jpg'
         },
         {
-            title: 'Second item',
-            subtitle: 'Subtitle',
             illustration: 'https://i.imgur.com/UPrs1EWl.jpg'
         },
     ];
 
+    async function getProviderById() {
+        try {
+            let provider = await backendAPI.get(`/provider/${providerId}`);
+            setProvider(provider.data);
+            console.log(provider.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function handleHiring() {
+        Linking.openURL(`sms:${provider.phoneNumber}?body=${"Olá, estou interessado em contratar seu serviço!"}`);
+        // Linking.openURL(`whatsapp://send?text='teste'&phone=${provider.phoneNumber}`);
+        backendAPI.post(`/service`, {
+            providerId: providerId,
+            userId: 1,
+            date: Date.now(),
+        });
+    }
+
     useEffect(() => {
-        setProvider(DATA.find(provider => provider.id === providerId));
-    }, [provider]);
+        getProviderById();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -52,7 +68,7 @@ export function ProviderDetails({ route, navigation }) {
                         <RoundButton
                             iconName="star-outline"
                             iconColor={theme.colors.yellow}
-                            onPress={() => {}}
+                            onPress={() => { }}
                         />
                     </View>
                 </View>
@@ -65,13 +81,13 @@ export function ProviderDetails({ route, navigation }) {
                         renderItem={(data) => {
                             return (
                                 <View style={styles.carouselItemContainer}>
-                                    <Image 
-                                        style={styles.carouselItemImage} 
-                                        source={{uri: data.item.illustration}} />
+                                    <Image
+                                        style={styles.carouselItemImage}
+                                        source={{ uri: data.item.illustration }} />
                                 </View>
                             )
                         }}
-                        onSnapToItem={(index) => setActiveSlide(index) }
+                        onSnapToItem={(index) => setActiveSlide(index)}
                     />
                 </View>
                 <Pagination
@@ -84,7 +100,7 @@ export function ProviderDetails({ route, navigation }) {
                     inactiveDotScale={1}
                 />
             </View>
-            
+
             <View style={styles.contentContainer}>
                 <View style={styles.detailsContainer}>
                     <HeaderProfile provider={provider} />
@@ -97,7 +113,9 @@ export function ProviderDetails({ route, navigation }) {
                     {provider && provider.price}
                 </Text>
                 <View style={styles.w60}>
-                    <FluidButton text={"Contratar"} />
+                    <FluidButton
+                        onPress={handleHiring}
+                        text={"Contratar"} />
                 </View>
             </View>
         </View>
