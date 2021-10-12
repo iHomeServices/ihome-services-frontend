@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { RectButton } from 'react-native-gesture-handler';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
@@ -30,7 +31,7 @@ export function Profile({ route, navigation }) {
                 </View>
 
                 <View style={styles.contentContainer}>
-                    <ScrollView style={styles.content}>
+                    <ScrollView>
 
                         <View style={styles.card}>
                             <Text style={styles.title}>
@@ -48,24 +49,54 @@ export function Profile({ route, navigation }) {
                                     Idade: 22 anos
                                 </Text>
                             </View>
-
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate('EditProfile')}
-                                style={styles.button}>
-                                <Text style={styles.buttonText}>
-                                    Editar dados
-                                </Text>
-                            </TouchableOpacity>
+                            
+                            <View style={styles.buttonContainer}>
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate('EditProfile')}>
+                                    <Text style={styles.buttonText}>
+                                        Editar dados
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
 
                         <Text style={styles.heading}>
                             Em andamento
                         </Text>
 
-                        <View style={[styles.card, styles.serviceProgressCard]}>
+                        {/* <View style={styles.card}>
                             <Text style={styles.noServiceProgress}>
                                 Nenhum serviço em andamento
                             </Text>
+                        </View> */}
+
+                        <View style={styles.card}>
+                            <View style={{
+                                marginBottom: 20,
+                            }}>
+                                <Text style={styles.text}>
+                                    Profissional: José Rezende
+                                </Text>
+                                <Text style={styles.text}>
+                                    Categoria: Eletricista
+                                </Text>
+                                <Text style={styles.text}>
+                                    Início em: 10/10/2021
+                                </Text>
+                            </View>
+
+                            <View style={styles.rowButtonContainer}>
+                                <TouchableOpacity style={[styles.outlineButton, styles.borderDanger]}>
+                                    <Text style={styles.textDanger}>
+                                        Cancelar
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={[styles.outlineButton, styles.borderSecondary]}>
+                                    <Text style={styles.textSecondary}>
+                                        Finalizar
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
 
                     </ScrollView>

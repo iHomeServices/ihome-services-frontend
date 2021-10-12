@@ -20,6 +20,8 @@ const colorsLight = {
     white: '#ffffff',
     dark: '#000000',
     yellow: '#ffd300',
+    red: '#E83F67',
+
 
     lightGray: '#F0F0F0'
 }
@@ -39,6 +41,7 @@ const colorsDark = {
     white: '#2d3748',
     dark: '#878a91',
     yellow: '#ffd300',
+    red: '#B53150',
 
     lightGray: '#eceded',
 }
