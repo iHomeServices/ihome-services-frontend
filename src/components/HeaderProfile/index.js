@@ -9,7 +9,8 @@ export function HeaderProfile({provider}) {
         <View style={styles.row}>
             <View>
                 <Text style={styles.heading}>
-                    {provider && provider.name}
+                    {/* {provider && provider.name} */}
+                    Felipe
                 </Text>
                 <Text style={styles.subHeading}>
                     São Carlos, SP

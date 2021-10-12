@@ -20,6 +20,8 @@ export const styles = StyleSheet.create({
         shadowRadius: 18,
 
         elevation: 10,
+
+        color: theme.colors.text
     },
     label: {
         fontSize: 14,

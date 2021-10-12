@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 
-import {View} from 'react-native';
+import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FluidButton } from '../../components/FluidButton';
 import { Input } from '../../components/Input';
 import { PickerField } from '../../components/PickerField';
+import { RoundButton } from '../../components/RoundButton';
+import { theme } from '../../global/styles/theme';
 
-import {styles} from './styles';
+import { styles } from './styles';
 
-export function EditProfile() {
+export function EditProfile({ route, navigation}) {
     const states = [
         'AC',
         'AL',
@@ -40,10 +45,23 @@ export function EditProfile() {
     const [state, setState] = useState(states[0]);
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
+                <RoundButton
+                    iconName="keyboard-arrow-left"
+                    iconColor={theme.colors.dark}
+                    iconSize={35}
+                    onPress={() => navigation.goBack()}
+                    noShadow
+                />
+
+                <Text style={styles.title}>Editar Perfil</Text>
+            </View>
+
+            <Text style={styles.subtitle}>Endereço</Text>
             <View style={styles.row}>
                 <View style={[styles.col50, styles.pr10]}>
-                    <Input label="CEP" 
+                    <Input label="CEP"
                         keyboardType="numeric" />
                 </View>
                 <View style={styles.col50}>
@@ -52,16 +70,16 @@ export function EditProfile() {
                 </View>
             </View>
 
-            <Input 
+            <Input
                 label="Endereço"
                 autoCompleteType="street-address" />
             <Input label="Bairro" />
-            
-            <View style={styles.row}>
+
+            <View style={[styles.row, styles.mb20]}>
                 <View style={styles.col40}>
-                    <PickerField 
-                        label="UF" 
-                        items={states} 
+                    <PickerField
+                        label="UF"
+                        items={states}
                         selectedValue={state}
                         onValueChange={(itemValue, itemIndex) => {
                             setState(itemValue);
@@ -71,6 +89,11 @@ export function EditProfile() {
                     <Input label="Cidade" />
                 </View>
             </View>
-        </View>
+
+            <FluidButton
+                text="Salvar"
+                onPress={() => {}}
+            />
+        </SafeAreaView>
     );
 }

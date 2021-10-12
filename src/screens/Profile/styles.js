@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     text: {
         fontSize: 16,
         fontFamily: theme.fonts.text300,
-        color: theme.colors.text2,
+        color: theme.colors.text,
         marginBottom: 5
     },
 

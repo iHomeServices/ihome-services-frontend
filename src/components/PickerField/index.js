@@ -4,6 +4,7 @@ import {Picker} from '@react-native-picker/picker';
 
 import {styles} from './styles';
 import { Text, View } from 'react-native';
+import { theme } from '../../global/styles/theme';
 
 export function PickerField({items, label, ...rest}) {
     
@@ -11,7 +12,10 @@ export function PickerField({items, label, ...rest}) {
         <View>
             <Text style={styles.label}>{label}</Text>
             <View style={styles.container}>
-                <Picker {...rest} >
+                <Picker 
+                    style={{color: theme.colors.text}}
+                    {...rest} 
+                >
                     {items.map((item, index) => (
                         <Picker.Item key={index} label={item} value={item} />
                     ))}

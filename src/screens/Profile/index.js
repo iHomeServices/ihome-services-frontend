@@ -7,23 +7,11 @@ import { theme } from '../../global/styles/theme';
 import { HeaderProfile } from '../../components/HeaderProfile';
 import { RoundButton } from '../../components/RoundButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { ModalView } from '../../components/ModalView';
-import { EditProfile } from '../EditProfile';
 
 export function Profile({ route, navigation }) {
     const userId = route.params.userId;
     const [user, setUser] = useState();
     const [openEditProfile, setOpenEditProfile] = useState(false);
-
-    /* const [services, setServices] = useState([]);
-
-    async function getServices() {
-        try {
-            setServices(categories.data);
-        } catch (error) {
-            console.log(error);
-        }
-    } */
 
     return (
         <>
@@ -62,7 +50,7 @@ export function Profile({ route, navigation }) {
                             </View>
 
                             <TouchableOpacity
-                                onPress={() => setOpenEditProfile(true)}
+                                onPress={() => navigation.navigate('EditProfile')}
                                 style={styles.button}>
                                 <Text style={styles.buttonText}>
                                     Editar dados
@@ -81,13 +69,7 @@ export function Profile({ route, navigation }) {
                         </View>
 
                     </ScrollView>
-
                 </View>
-                <ModalView
-                    closeModal={() => setOpenEditProfile(false)}
-                    visible={openEditProfile}>
-                    <EditProfile />
-                </ModalView>
             </SafeAreaView>
         </>
     );
