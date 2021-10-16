@@ -22,7 +22,7 @@ export function Categories({ categories, handleChangeCategory }) {
         <FlatList data={categories}
             renderItem={renderItem}
             horizontal={true}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item._id}
             showsHorizontalScrollIndicator={false}
             extraData={selectedId} />
     );

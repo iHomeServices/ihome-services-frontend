@@ -36,10 +36,13 @@ export function Home({ route, navigation }) {
   async function getCategories() {
     try {
       let response = await backendAPI.get('/category');
-      setCategories(response.data);
-      setCategoryId(categories._id);
+      const categoriesResponse = response.data;
+      setCategories(categoriesResponse);
+      setCategoryId(categoriesResponse[0].id);
     } catch (error) {
-      console.log(error);
+      console.log(`Couldn't get categories`, error.message, `Trying again`);
+      setCategories([]);
+      getCategories();
     }
   }
 
@@ -47,9 +50,11 @@ export function Home({ route, navigation }) {
     try {
       let response = await backendAPI.get('provider');
       setProviders(response.data);
-      userId = providers[0]._id;
+      userId = 1;
     } catch (error) {
-      console.log(error);
+      console.log(`Couldn't get providers`, error.message, `Trying again`);
+      setProviders([]);
+      getProviders();
     }
   }
 

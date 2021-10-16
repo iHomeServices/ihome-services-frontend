@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RectButton } from 'react-native-gesture-handler';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
@@ -12,7 +11,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export function Profile({ route, navigation }) {
     const userId = route.params.userId;
     const [user, setUser] = useState();
-    const [openEditProfile, setOpenEditProfile] = useState(false);
 
     return (
         <>
