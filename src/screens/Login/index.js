@@ -10,9 +10,10 @@ import { Input } from '../../components/Input';
 export function Login({ navigation }) {
 
     const handleLoginClick = () => {
-        navigation.navigate('Home', {
-            userId: '2'
-        })
+        navigation.navigate('Home');
+        // navigation.navigate('Home', {
+        //     userId: '2'
+        // })
     }
 
     return (

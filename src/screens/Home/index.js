@@ -17,14 +17,14 @@ import { theme } from '../../global/styles/theme';
 import backendAPI from '../../api/backend';
 
 export function Home({ route, navigation }) {
-  const [categoryId, setCategoryId] = useState(1);
+  const [categoryId, setCategoryId] = useState('');
   const [providers, setProviders] = useState([]);
   const [categories, setCategories] = useState([]);
-  const userId = route.params.userId;
+  let userId;
+  // const userId = route.params.userId;
 
   const handleChangeCategory = (id) => {
     setCategoryId(id);
-    console.log(providers)
   }
 
   const handleProfileClick = () => {
@@ -35,8 +35,9 @@ export function Home({ route, navigation }) {
 
   async function getCategories() {
     try {
-      let categories = await backendAPI.get('/category');
-      setCategories(categories.data);
+      let response = await backendAPI.get('/category');
+      setCategories(response.data);
+      setCategoryId(categories._id);
     } catch (error) {
       console.log(error);
     }
@@ -44,9 +45,9 @@ export function Home({ route, navigation }) {
 
   async function getProviders() {
     try {
-      let providers = await backendAPI.get('provider');
-      // console.log("providers", providers);
-      setProviders(providers.data);
+      let response = await backendAPI.get('provider');
+      setProviders(response.data);
+      userId = providers[0]._id;
     } catch (error) {
       console.log(error);
     }
