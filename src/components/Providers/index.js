@@ -6,7 +6,7 @@ import { ProviderItem } from '../ProviderItem';
 
 export function Providers({ categoryId, providers, navigation }) {
     const handleClickProvider = provider => navigation.navigate('ProviderDetails', {
-        providerId: provider.item.id
+        providerId: provider.item._id
     });
 
     const renderProvider = provider => {

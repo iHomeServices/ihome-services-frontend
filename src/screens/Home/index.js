@@ -15,11 +15,15 @@ import { Image } from 'react-native-elements/dist/image/Image';
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import backendAPI from '../../api/backend';
+import { Loader } from '../../components/AnimatedLoader';
 
 export function Home({ route, navigation }) {
   const [categoryId, setCategoryId] = useState('');
   const [providers, setProviders] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
+
   let userId;
   // const userId = route.params.userId;
 
@@ -41,8 +45,6 @@ export function Home({ route, navigation }) {
       setCategoryId(categoriesResponse[0].id);
     } catch (error) {
       console.log(`Couldn't get categories`, error.message, `Trying again`);
-      setCategories([]);
-      getCategories();
     }
   }
 
@@ -50,12 +52,12 @@ export function Home({ route, navigation }) {
     try {
       let response = await backendAPI.get('provider');
       setProviders(response.data);
+      setIsLoading(false);
       userId = 1;
     } catch (error) {
       console.log(`Couldn't get providers`, error.message, `Trying again`);
-      setProviders([]);
-      getProviders();
     }
+
   }
 
   useEffect(() => {
@@ -95,11 +97,16 @@ export function Home({ route, navigation }) {
       </View>
 
       <View style={styles.providerContainer}>
-        <Providers
-          categoryId={categoryId}
-          providers={providers}
-          navigation={navigation}
-        />
+        { isLoading ? (
+            <Loader visible={true} />
+          ) : (
+            <Providers
+              categoryId={categoryId}
+              providers={providers}
+              navigation={navigation}
+            />
+          )
+        }
       </View>
 
     </SafeAreaView>
