@@ -20,29 +20,30 @@ export function ProviderItem({ provider, handleClickProvider }) {
                 style={styles.card}
                 onPress={handleClickProvider}>
                 <View>
-                    <Text style={styles.name}>{provider.name}</Text>
 
                     <View style={styles.row}>
                         <Image 
-                            source={ require('../../assets/fotoPerfil.jpg') }  
+                            source={{uri: provider.avatar }}  
                             style={styles.avatar}
                             PlaceholderContent={<ActivityIndicator />} 
                         />
-                        <Text style={styles.category}>Eletricista</Text>
+                        <View style={styles.pl20}>
+                            <Text style={styles.name}>{provider.name}</Text>
+                            <View style={styles.row}>
+                                <Rating 
+                                    type='custom'
+                                    readonly
+                                    imageSize={20} 
+                                    ratingColor={theme.colors.primary}  
+                                    tintColor={theme.colors.white}   
+                                    ratingBackgroundColor={theme.colors.lightGray}                 
+                                    startingValue={2.5} />
+
+                                <Text style={styles.opinion}>14 opiniões</Text>
+                            </View>
+                        </View>
                     </View>
 
-                    <View style={styles.row}>
-                        <Rating 
-                            type='custom'
-                            readonly
-                            imageSize={20} 
-                            ratingColor={theme.colors.primary}  
-                            tintColor={theme.colors.white}   
-                            ratingBackgroundColor={theme.colors.lightGray}                 
-                            startingValue={2.5} />
-
-                        <Text style={styles.opinion}>14 opiniões</Text>
-                    </View>
                 </View>
                 <View style={styles.priceContainer}>
                     <Text style={styles.price}>{provider.price}</Text>

@@ -76,7 +76,7 @@ export const styles = StyleSheet.create({
 
     rowButtonContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
     },
 
     textDanger: {
@@ -98,7 +98,7 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: theme.colors.primary,
 
-        paddingHorizontal: 50,
+        paddingHorizontal: 48,
         paddingVertical: 10
     }
 });

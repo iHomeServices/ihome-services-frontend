@@ -50,7 +50,7 @@ export function Home({ route, navigation }) {
 
   async function getProviders() {
     try {
-      let response = await backendAPI.get('provider');
+      let response = await backendAPI.get('/provider');
       setProviders(response.data);
       setIsLoading(false);
       userId = 1;
@@ -68,6 +68,8 @@ export function Home({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Loader visible={isLoading} />
+
       <View style={styles.header}>
         <View style={styles.row}>
           <Image
@@ -97,16 +99,11 @@ export function Home({ route, navigation }) {
       </View>
 
       <View style={styles.providerContainer}>
-        { isLoading ? (
-            <Loader visible={true} />
-          ) : (
-            <Providers
-              categoryId={categoryId}
-              providers={providers}
-              navigation={navigation}
-            />
-          )
-        }
+        <Providers
+          categoryId={categoryId}
+          providers={providers}
+          navigation={navigation}
+        />
       </View>
 
     </SafeAreaView>

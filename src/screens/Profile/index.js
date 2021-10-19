@@ -62,12 +62,6 @@ export function Profile({ route, navigation }) {
                             Em andamento
                         </Text>
 
-                        {/* <View style={styles.card}>
-                            <Text style={styles.noServiceProgress}>
-                                Nenhum serviço em andamento
-                            </Text>
-                        </View> */}
-
                         <View style={styles.card}>
                             <View style={{
                                 marginBottom: 20,
