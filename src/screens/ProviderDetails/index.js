@@ -29,7 +29,6 @@ export function ProviderDetails({ route, navigation }) {
         try {
             let provider = await backendAPI.get(`/provider/${providerId}`);
             setProvider(provider.data);
-            console.log(provider.data)
         } catch (error) {
             console.log(error);
         }

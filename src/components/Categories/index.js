@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FlatList } from 'react-native';
 import { CategoryItem } from '../CategoryItem';
@@ -6,17 +6,29 @@ import { CategoryItem } from '../CategoryItem';
 import { styles } from './styles';
 
 export function Categories({ categories, handleChangeCategory }) {
-    const [selectedId, setSelectedId] = useState(1);
+    const [selectedId, setSelectedId] = useState('');
 
-    const renderItem = ({ item }) => (
-        <CategoryItem
-            item={item}
-            onPress={() => {
-                setSelectedId(item.id);
-                handleChangeCategory(item.id);
-            }}
-            selected={selectedId == item.id} />
-    );
+    // useEffect(() => {
+    //     console.log(categories);
+    //     setSelectedId(categories[0]._id);
+    //     handleChangeCategory(categories[0]._id);
+    // }, []);
+
+    const renderItem = ({ item }) => {
+        if (item.name === 'Eletricista') {
+            setSelectedId(item._id);
+            handleChangeCategory(item._id);
+        }
+        return (
+            <CategoryItem
+                item={item}
+                onPress={() => {
+                    setSelectedId(item._id);
+                    handleChangeCategory(item._id);
+                }}
+                selected={selectedId == item._id} />
+        );
+    }
 
     return (
         <FlatList data={categories}
