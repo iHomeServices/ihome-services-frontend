@@ -21,16 +21,18 @@ export const styles = StyleSheet.create({
         marginBottom: 5,
         paddingHorizontal: 25,
     },
-
+    pl20: {
+        paddingLeft: 20,
+    },
     row: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 5,
     },
     avatar: {
-        height: 30,
-        width: 30,
-        borderRadius: 15,
+        height: 80,
+        width: 80,
+        borderRadius: 40,
     },
     name: {
         fontFamily: theme.fonts.text400,

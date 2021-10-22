@@ -10,11 +10,13 @@ import { FluidButton } from '../../components/FluidButton';
 import { HeaderProfile } from '../../components/HeaderProfile';
 import { DetailOptions } from '../../components/DetailOptions';
 import backendAPI from '../../api/backend';
+import { Loader } from '../../components/AnimatedLoader';
 
 export function ProviderDetails({ route, navigation }) {
     const providerId = route.params.providerId;
-    const [provider, setProvider] = useState();
+    const [provider, setProvider] = useState({});
     const [activeSlide, setActiveSlide] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
     const entries = [
         {
@@ -27,16 +29,19 @@ export function ProviderDetails({ route, navigation }) {
 
     async function getProviderById() {
         try {
-            let provider = await backendAPI.get(`/provider/${providerId}`);
-            setProvider(provider.data);
+            let providerResponse = await backendAPI.get(`/provider/${providerId}`);
+            setProvider(providerResponse.data);
+            setIsLoading(false);
+            console.log(providerResponse.data)
         } catch (error) {
             console.log(error);
         }
     }
 
     function handleHiring() {
-        Linking.openURL(`sms:${provider.phoneNumber}?body=${"Olá, estou interessado em contratar seu serviço!"}`);
-        // Linking.openURL(`whatsapp://send?text='teste'&phone=${provider.phoneNumber}`);
+        const message = `Olá, gostaria de contratar você para realizar um serviço.`;
+        Linking.openURL(`sms:${provider.phoneNumber}?body=${message}`);
+        // Linking.openURL(`whatsapp://send?text=${message}&phone=${provider.phoneNumber}`);
         backendAPI.post(`/service`, {
             providerId: providerId,
             userId: 1,
@@ -50,6 +55,8 @@ export function ProviderDetails({ route, navigation }) {
 
     return (
         <View style={styles.container}>
+            <Loader visible={isLoading} />
+
             <StatusBar
                 backgroundColor="transparent"
                 translucent={true}
@@ -109,7 +116,7 @@ export function ProviderDetails({ route, navigation }) {
 
             <View style={styles.footer}>
                 <Text style={styles.heading}>
-                    {provider && provider.price}
+                    {provider.price}
                 </Text>
                 <View style={styles.w60}>
                     <FluidButton

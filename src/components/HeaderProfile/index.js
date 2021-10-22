@@ -9,18 +9,18 @@ export function HeaderProfile({provider}) {
         <View style={styles.row}>
             <View>
                 <Text style={styles.heading}>
-                    {/* {provider && provider.name} */}
-                    Felipe
+                    {provider?.name}
                 </Text>
                 <Text style={styles.subHeading}>
-                    São Carlos, SP
+                    {provider?.city}{`, `}
+                    {provider?.state}
                 </Text>
                 <Text style={styles.category}>
                     Eletricista
                 </Text>
             </View>
             <Image
-                source={{ uri: 'https://github.com/FelipeSD.png' }}
+                source={{ uri: provider?.avatar }}
                 style={styles.avatar}
                 PlaceholderContent={<ActivityIndicator />} />
         </View>
