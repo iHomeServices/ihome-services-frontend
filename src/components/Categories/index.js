@@ -5,28 +5,15 @@ import { CategoryItem } from '../CategoryItem';
 
 import { styles } from './styles';
 
-export function Categories({ categories, handleChangeCategory }) {
-    const [selectedId, setSelectedId] = useState('');
-
-    // useEffect(() => {
-    //     console.log(categories);
-    //     setSelectedId(categories[0]._id);
-    //     handleChangeCategory(categories[0]._id);
-    // }, []);
-
+export function Categories({ categories, handleChangeCategory, selectedCategory }) {
     const renderItem = ({ item }) => {
-        if (item.name === 'Eletricista') {
-            setSelectedId(item._id);
-            handleChangeCategory(item._id);
-        }
         return (
             <CategoryItem
                 item={item}
                 onPress={() => {
-                    setSelectedId(item._id);
                     handleChangeCategory(item._id);
                 }}
-                selected={selectedId == item._id} />
+                selected={selectedCategory == item._id} />
         );
     }
 
@@ -36,6 +23,6 @@ export function Categories({ categories, handleChangeCategory }) {
             horizontal={true}
             keyExtractor={item => item._id}
             showsHorizontalScrollIndicator={false}
-            extraData={selectedId} />
+            extraData={selectedCategory} />
     );
 }

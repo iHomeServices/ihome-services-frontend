@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import {
   ActivityIndicator,
-  Text,
   View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -42,9 +41,9 @@ export function Home({ route, navigation }) {
       let response = await backendAPI.get('/category');
       const categoriesResponse = response.data;
       setCategories(categoriesResponse);
-      setCategoryId(categoriesResponse[0].id);
+      setCategoryId(categoriesResponse[0]._id);
     } catch (error) {
-      console.log(`Couldn't get categories`, error.message, `Trying again`);
+      console.log(`Couldn't get categories`, error.message);
     }
   }
 
@@ -55,7 +54,7 @@ export function Home({ route, navigation }) {
       setIsLoading(false);
       userId = 1;
     } catch (error) {
-      console.log(`Couldn't get providers`, error.message, `Trying again`);
+      console.log(`Couldn't get providers`, error.message);
     }
 
   }
@@ -94,6 +93,7 @@ export function Home({ route, navigation }) {
 
       <View style={styles.categoriesContainer}>
         <Categories
+          selectedCategory={categoryId}
           categories={categories}
           handleChangeCategory={handleChangeCategory} />
       </View>
