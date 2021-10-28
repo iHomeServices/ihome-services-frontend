@@ -15,9 +15,6 @@ export function HeaderProfile({provider}) {
                     {provider?.city}{`, `}
                     {provider?.state}
                 </Text>
-                <Text style={styles.category}>
-                    Eletricista
-                </Text>
             </View>
             <Image
                 source={{ uri: provider?.avatar }}

@@ -23,5 +23,18 @@ export const styles = StyleSheet.create({
         fontFamily: theme.fonts.text300,
         marginVertical: 10,
         color: theme.colors.text,
-    }
+    },
+    rating: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+    },
+    ratingText: {
+        fontFamily: theme.fonts.text300,
+        color: theme.colors.text,
+        fontSize: 16,
+        marginLeft: 10,
+    },
 });

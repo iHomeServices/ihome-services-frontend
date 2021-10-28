@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
     FlatList,
-    View
+    View,
+    Text
 } from 'react-native';
 import { CommentItem } from '../CommentItem';
 
@@ -39,16 +40,19 @@ const DATA = [
     },
 ]
 
-export function Comments(){
+export function Comments({comments}){
     const renderItem = ({ item }) => (
         <CommentItem item={item} />
     );
 
     return (
-        <FlatList data={DATA}
+        <FlatList data={comments}
             style={styles.container}
             renderItem={renderItem}
+            ListEmptyComponent={<View style={styles.empty}>
+                <Text style={styles.emptyText}>Ainda não tem avaliações</Text>
+            </View>}
             vertical={true}
-            keyExtractor={item => item.id} />
+            keyExtractor={item => item._id} />
     );
 }

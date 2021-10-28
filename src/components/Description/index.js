@@ -4,7 +4,7 @@ import {ScrollView, Text, View} from 'react-native';
 
 import {styles} from './styles';
 
-export function Description() {
+export function Description({description}) {
     return (
         <View style={styles.container}>
             <View>
@@ -13,12 +13,7 @@ export function Description() {
                 </Text>
                 <ScrollView>
                     <Text style={styles.description}>
-                        Formado no curso técnico de Elétrica no SENAI;
-                        {`\n`}
-                        Experiência de 2 anos;
-                        {`\n`}
-                        Participação no seminário IEEE ESW Brasil 2018 - Electrical Safety Workshop Brasil 
-                        do Instituto dos Engenheiros Eletricistas e Eletrônicos.
+                        {description ? description : 'Não há descrição para este serviço.'}
                     </Text>
                 </ScrollView>
             </View>

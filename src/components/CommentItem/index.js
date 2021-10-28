@@ -14,19 +14,25 @@ export function CommentItem({item}){
         <View style={styles.container}>
             <View style={styles.card}>
                 <Text style={styles.name}>
-                    {item.name}
+                    {item.nameCustomer}
                 </Text>
                 <Text style={styles.comment}>
-                    {item.comment}
+                    {item.comment || '(Sem comentário)'}
                 </Text>
-                <Rating
-                    type='custom'
-                    readonly
-                    imageSize={20} 
-                    ratingColor={theme.colors.primary}  
-                    tintColor={theme.colors.white}   
-                    ratingBackgroundColor={theme.colors.lightGray}                 
-                    startingValue={2.5} />
+
+                <View style={styles.rating}>
+                    <Rating
+                        type='custom'
+                        readonly
+                        imageSize={20} 
+                        ratingColor={theme.colors.primary}  
+                        tintColor={theme.colors.white}   
+                        ratingBackgroundColor={theme.colors.lightGray}                 
+                        startingValue={item.rating} />
+                    <Text style={styles.ratingText}>
+                        {item.rating}
+                    </Text>
+                </View>
             </View>
         </View>
     );

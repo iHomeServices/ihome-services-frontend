@@ -58,24 +58,8 @@ export function EditProfile({ route, navigation}) {
                 <Text style={styles.title}>Editar Perfil</Text>
             </View>
 
-            <Text style={styles.subtitle}>Endereço</Text>
-            <View style={styles.row}>
-                <View style={[styles.col50, styles.pr10]}>
-                    <Input label="CEP"
-                        keyboardType="numeric" />
-                </View>
-                <View style={styles.col50}>
-                    <Input label="Número"
-                        keyboardType="number-pad" />
-                </View>
-            </View>
 
-            <Input
-                label="Endereço"
-                autoCompleteType="street-address" />
-            <Input label="Bairro" />
-
-            <View style={[styles.row, styles.mb20]}>
+            <View style={[styles.row]}>
                 <View style={styles.col40}>
                     <PickerField
                         label="UF"
@@ -89,6 +73,9 @@ export function EditProfile({ route, navigation}) {
                     <Input label="Cidade" />
                 </View>
             </View>
+
+            <Input label="Telefone" />
+            <Input label="E-mail" />
 
             <FluidButton
                 text="Salvar"

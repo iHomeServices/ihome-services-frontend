@@ -12,8 +12,8 @@ export function Loader({visible}){
     <AnimatedLoader
         visible={visible}
         overlayColor="rgba(255,255,255,0.75)"
-        source={require("../../assets/loading-repair-setting.json")}
-        // source={require("../../assets/data-in-move.json")}
+        // source={require("../../assets/loading-repair-setting.json")}
+        source={require("../../assets/data-in-move.json")}
         animationStyle={styles.lottie}
         speed={2}
       >

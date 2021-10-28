@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View, StatusBar, Linking } from 'react-native';
+import { Text, View, StatusBar, Linking, Alert } from 'react-native';
 
 import { styles } from './styles';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -40,13 +40,26 @@ export function ProviderDetails({ route, navigation }) {
 
     function handleHiring() {
         const message = `Olá, gostaria de contratar você para realizar um serviço.`;
-        Linking.openURL(`sms:${provider.phoneNumber}?body=${message}`);
-        // Linking.openURL(`whatsapp://send?text=${message}&phone=${provider.phoneNumber}`);
-        backendAPI.post(`/service`, {
-            providerId: providerId,
-            userId: 1,
-            date: Date.now(),
-        });
+        const urlWhatsapp = `whatsapp://send?text=${message}&phone=${provider.phoneNumber}`
+        const urlSms = `sms:${provider.phoneNumber}?body=${message}`
+        
+        Linking.canOpenURL(urlWhatsapp)
+            .then((supported) => {
+                backendAPI.post(`/service`, {
+                    providerId: providerId,
+                    userId: 1,
+                    date: Date.now(),
+                }).catch(error => {
+                    console.log('Falha na adição de um serviço', error);
+                });
+
+                if (!supported) {
+                    return Linking.openURL(urlSms)
+                } else {
+                    return Linking.openURL(urlWhatsapp)
+                }
+            })
+            .catch((err) => Alert.alert('Erro', 'Não foi possível abrir o aplicativo'));
     }
 
     useEffect(() => {
@@ -110,7 +123,9 @@ export function ProviderDetails({ route, navigation }) {
             <View style={styles.contentContainer}>
                 <View style={styles.detailsContainer}>
                     <HeaderProfile provider={provider} />
-                    <DetailOptions />
+                    <DetailOptions 
+                        comments={provider.services}
+                        description={provider.description} />
                 </View>
             </View>
 
