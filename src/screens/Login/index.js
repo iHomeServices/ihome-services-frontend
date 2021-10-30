@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FullLogo from '../../assets/full_logo.svg';
-import { ScrollView, Text, View, Button } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './styles';
 import { FluidButton } from '../../components/FluidButton';
 import { Input } from '../../components/Input';
+import { useAuth } from '../../hooks/auth';
 
 export function Login({ navigation }) {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleLoginClick = () => {
-        navigation.navigate('Home');
-        // navigation.navigate('Home', {
-        //     userId: '2'
-        // })
+    const {login, user, loading} = useAuth();
+
+    const handleLoginClick = async () => {
+        if(!username || !password) {
+            return;
+        }
+
+        await login({username, password});
+        if (Object.keys(user).length > 0) {
+            navigation.navigate('Home');
+        }
     }
 
     return (
@@ -36,16 +45,19 @@ export function Login({ navigation }) {
 
                     <View style={styles.formGroup}>
                         <Input
-                            label="Email"
-                            keyboardType='email-address'
-                            autoCompleteType='email' />
+                            value={username}
+                            onChangeText={setUsername}
+                            label="Usuário" />
                         <Input
                             label="Senha"
+                            value={password}
+                            onChangeText={setPassword}
                             secureTextEntry={true} />
                     </View>
 
                     <FluidButton
                         onPress={handleLoginClick}
+                        isLoading={loading}
                         text="LOGIN" />
 
                     <View style={styles.footer}>

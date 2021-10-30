@@ -23,17 +23,12 @@ export function Home({ route, navigation }) {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  let userId;
-  // const userId = route.params.userId;
-
   const handleChangeCategory = (id) => {
     setCategoryId(id);
   }
 
   const handleProfileClick = () => {
-    navigation.navigate('Profile', {
-      userId: userId
-    });
+    navigation.navigate('Profile');
   }
 
   async function getCategories() {
@@ -52,7 +47,6 @@ export function Home({ route, navigation }) {
       let response = await backendAPI.get('/provider');
       setProviders(response.data);
       setIsLoading(false);
-      userId = 1;
     } catch (error) {
       console.log(`Couldn't get providers`, error.message);
     }
@@ -75,7 +69,7 @@ export function Home({ route, navigation }) {
             source={{ uri: 'https://github.com/FelipeSD.png' }}
             style={styles.avatar}
             onPress={handleProfileClick}
-            PlaceholderContent={<ActivityIndicator />} />
+            PlaceholderContent={<ActivityIndicator size="small" color="#fff" />} />
         </View>
 
         <View style={styles.row}>

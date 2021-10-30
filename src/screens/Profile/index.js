@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useAuth } from '../../hooks/auth';
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { HeaderProfile } from '../../components/HeaderProfile';
@@ -9,8 +10,7 @@ import { RoundButton } from '../../components/RoundButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export function Profile({ route, navigation }) {
-    const userId = route.params.userId;
-    const [user, setUser] = useState();
+    const {user} = useAuth();
 
     return (
         <>
@@ -42,9 +42,6 @@ export function Profile({ route, navigation }) {
                                 </Text>
                                 <Text style={styles.text}>
                                     Fone: (16) 99242-8576
-                                </Text>
-                                <Text style={styles.text}>
-                                    Idade: 22 anos
                                 </Text>
                             </View>
                             

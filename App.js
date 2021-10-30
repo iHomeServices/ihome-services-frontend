@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import {AuthProvider} from './src/hooks/auth';
 import { Login } from './src/screens/Login';
 import { Home } from './src/screens/Home';
 import { Register } from './src/screens/Register';
@@ -26,47 +27,49 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{
-              headerShown: false
-            }} />
-          <Stack.Screen
-            name="Register"
-            component={Register}
-            options={{
-              headerShown: false
-            }} />
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              headerShown: false
-            }} />
-          <Stack.Screen
-            name="ProviderDetails"
-            component={ProviderDetails}
-            options={{
-              headerShown: false
-            }} />
-          <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{
-              headerShown: false
-            }} />
-          <Stack.Screen
-            name="EditProfile"
-            component={EditProfile}
-            options={{
-              headerShown: false,
-            }} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                headerShown: false
+              }} />
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={{
+                headerShown: false
+              }} />
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{
+                headerShown: false
+              }} />
+            <Stack.Screen
+              name="ProviderDetails"
+              component={ProviderDetails}
+              options={{
+                headerShown: false
+              }} />
+            <Stack.Screen
+              name="Profile"
+              component={Profile}
+              options={{
+                headerShown: false
+              }} />
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfile}
+              options={{
+                headerShown: false,
+              }} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </AuthProvider>
   )
 }
