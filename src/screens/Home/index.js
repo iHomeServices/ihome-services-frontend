@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import {
   ActivityIndicator,
+  Pressable,
   View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -86,10 +87,15 @@ export function Home({ route, navigation }) {
             size={23}
             color={theme.colors.dark}
             name={"bell"} />
-          <FeatherIcon
-            size={23}
-            color={theme.colors.dark}
-            name={"settings"} />
+
+          <Pressable 
+            onPress={() => navigation.navigate('Settings')}
+          >
+            <FeatherIcon
+              size={23}
+              color={theme.colors.dark}
+              name={"settings"} />
+          </Pressable>
         </View>
       </View>
 
