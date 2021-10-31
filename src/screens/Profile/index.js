@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Alert, Modal, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAuth } from '../../hooks/auth';
@@ -7,10 +7,81 @@ import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { HeaderProfile } from '../../components/HeaderProfile';
 import { RoundButton } from '../../components/RoundButton';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import backendAPI from '../../api/backend';
+import { RatingService } from '../../components/RatingService';
 
 export function Profile({ route, navigation }) {
-    const {user} = useAuth();
+    const user = route.params.user;
+
+    const [isModalRatingOpen, setIsModalRatingOpen] = useState(false);
+    const [endingService, setEndingService] = useState(null);
+    
+    async function findServices(){
+        try{
+            const response = await backendAPI.get(`/provider/${user._id}`);
+            console.log(response.data);
+        }catch(err){
+            Alert.alert('Erro', 'Erro ao buscar serviços');
+        }
+    }
+
+    function handleCancelService(id){
+        Alert.alert('Cancelar', 'Deseja cancelar esse serviço?',
+        [
+            {
+                text: 'Não',
+                style: 'cancel'
+            },
+            {
+                text: 'Sim',
+                onPress: () => cancelService(id)
+            }
+        ]);
+    }
+
+    function handleFinishService(id){
+        Alert.alert('Finalizar', 'Deseja finalizar esse serviço?',
+        [
+            {
+                text: 'Não',
+                style: 'cancel'
+            },
+            {
+                text: 'Sim',
+                onPress: () => {
+                    setEndingService(id);
+                    setIsModalRatingOpen(true)
+                }
+            }
+        ]);
+    }
+
+    async function cancelService(id) {
+        try{
+            const response = await backendAPI.delete(`/provider/${id}`);
+            console.log(response.data);
+        }catch(err){
+            Alert.alert('Erro', 'Erro ao cancelar serviço');
+        }
+    }
+
+    async function finishService(formData){
+        try{
+            // salvar avaliação e finalizar serviço
+            const response = await backendAPI.put(`/finish-service/${endingService}`, {
+                rating: formData.rating,
+                comment: formData.comment
+            });
+            console.log(response.data);
+        }catch(err){
+            Alert.alert('Erro', 'Erro ao finalizar serviço');
+        }
+    }
+
+    useEffect(() => {
+        // encontrar serviços do usuario que estão em andamento e finalizados
+        findServices();
+    }, [])
 
     return (
         <>
@@ -38,20 +109,20 @@ export function Profile({ route, navigation }) {
 
                             <View>
                                 <Text style={styles.text}>
-                                    Email: felipe98_stz@hotmail.com
+                                    Email: {user.email ? user.email : 'Não informado'}
                                 </Text>
                                 <Text style={styles.text}>
-                                    Fone: (16) 99242-8576
+                                    Fone: {user.phone ? user.phone : 'Não informado'}
                                 </Text>
                             </View>
                             
                             <View style={styles.buttonContainer}>
-                                <TouchableOpacity
+                                <Pressable
                                     onPress={() => navigation.navigate('EditProfile')}>
                                     <Text style={styles.buttonText}>
                                         Editar dados
                                     </Text>
-                                </TouchableOpacity>
+                                </Pressable>
                             </View>
                         </View>
 
@@ -75,22 +146,42 @@ export function Profile({ route, navigation }) {
                             </View>
 
                             <View style={styles.rowButtonContainer}>
-                                <TouchableOpacity style={[styles.outlineButton, styles.borderDanger]}>
+                                <Pressable 
+                                    onPress={() => handleCancelService()} // colocar no parametro o id do serviço
+                                    style={[styles.outlineButton, styles.borderDanger]}>
                                     <Text style={styles.textDanger}>
                                         Cancelar
                                     </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={[styles.outlineButton, styles.borderSecondary]}>
+                                </Pressable>
+                                <Pressable 
+                                    onPress={() => handleFinishService()} // colocar no parametro o id do serviço
+                                    style={[styles.outlineButton, styles.borderSecondary]}>
                                     <Text style={styles.textSecondary}>
                                         Finalizar
                                     </Text>
-                                </TouchableOpacity>
+                                </Pressable>
                             </View>
                         </View>
 
                     </ScrollView>
                 </View>
             </SafeAreaView>
+
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={isModalRatingOpen}
+                onRequestClose={() => {
+                    setEndingService(null);
+                }}>
+                    <RatingService 
+                        handleClose={() => setIsModalRatingOpen(false)}
+                        handleRating={(formData) => {
+                            setIsModalRatingOpen(false)
+                            finishService(formData)
+                        }}
+                    />
+            </Modal>
         </>
     );
 }

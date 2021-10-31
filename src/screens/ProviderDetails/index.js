@@ -45,7 +45,7 @@ export function ProviderDetails({ route, navigation }) {
         
         Linking.canOpenURL(urlWhatsapp)
             .then((supported) => {
-                backendAPI.post(`/service`, {
+                backendAPI.post(`/provider/service`, {
                     providerId: providerId,
                     userId: 1,
                     date: Date.now(),

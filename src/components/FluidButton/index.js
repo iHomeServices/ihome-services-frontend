@@ -1,17 +1,17 @@
 import React from 'react';
-import { ActivityIndicator, Text } from 'react-native';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import {styles} from './styles';
 
 export function FluidButton({
     text, 
-    isLoading = false, 
+    isLoading = false,
     ...rest
 }){
     return (
-        <RectButton 
-            style={styles.container}
+        <Pressable
+            style={[styles.container, rest.style]}
             {...rest}
         >
             {isLoading ? (
@@ -21,6 +21,6 @@ export function FluidButton({
                     {text}
                 </Text>
             )}
-        </RectButton>
-    );
+        </Pressable>
+    )
 }

@@ -22,15 +22,18 @@ export function Register({ navigation }) {
             return;
         }
 
-        await register({
-            name,
-            username,
-            password,
-            isProvider
-        });
-        
-        console.log("retorno usuario cadastrado:", user);
-        toLogin();
+        try{
+            await register({
+                name,
+                username,
+                password,
+                isProvider
+            });
+
+            navigation.navigate('Login');
+        } catch(error) {
+            Alert.alert('Erro', error.message);
+        }
     }
 
     function toLogin() {

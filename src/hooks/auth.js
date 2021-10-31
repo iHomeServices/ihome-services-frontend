@@ -14,11 +14,11 @@ function AuthProvider({children}){
                 username,
                 password
             });
-            const user = await response.data;
-            console.log(user)
+            const user = response.data;
             setUser(user);
         }catch(e){
             console.log(e);
+            throw new Error("Não foi possível logar");
         }finally{
             setLoading(false);
         }
@@ -38,21 +38,28 @@ function AuthProvider({children}){
                 password,
                 isProvider
             });
-            const user = await response.data;
-            console.log(user);
+
+            const user = response.data;
             setUser(user);
         }catch(e){
             console.log(e);
+            throw new Error("Não foi possível cadastrar");
         }finally{
             setLoading(false);
         }
     }
 
+    async function logout(){
+        setUser({});
+    }
+
     return (
         <AuthContext.Provider value={{
             user,
+            setUser,
             loading,
             login,
+            logout,
             register
         }}>
             {children}

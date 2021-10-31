@@ -10,11 +10,13 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import { Categories } from '../../components/Categories';
 import { Providers } from '../../components/Providers';
 import { Image } from 'react-native-elements/dist/image/Image';
+import default_avatar from '../../assets/default_avatar.png';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import backendAPI from '../../api/backend';
 import { Loader } from '../../components/AnimatedLoader';
+import { useAuth } from '../../hooks/auth';
 
 export function Home({ route, navigation }) {
   const [categoryId, setCategoryId] = useState('');
@@ -23,12 +25,18 @@ export function Home({ route, navigation }) {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const {user} = useAuth();
+
+  const avatar = user.avatar ? user.avatar : default_avatar;
+
   const handleChangeCategory = (id) => {
     setCategoryId(id);
   }
 
   const handleProfileClick = () => {
-    navigation.navigate('Profile');
+    navigation.navigate('Profile', {
+      user: user
+    });
   }
 
   async function getCategories() {
@@ -66,7 +74,7 @@ export function Home({ route, navigation }) {
       <View style={styles.header}>
         <View style={styles.row}>
           <Image
-            source={{ uri: 'https://github.com/FelipeSD.png' }}
+            source={avatar}
             style={styles.avatar}
             onPress={handleProfileClick}
             PlaceholderContent={<ActivityIndicator size="small" color="#fff" />} />

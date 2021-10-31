@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FullLogo from '../../assets/full_logo.svg';
-import { ScrollView, Text, View } from 'react-native';
+import { Alert, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './styles';
@@ -18,12 +18,18 @@ export function Login({ navigation }) {
         if(!username || !password) {
             return;
         }
-
-        await login({username, password});
-        if (Object.keys(user).length > 0) {
-            navigation.navigate('Home');
+        try {
+            await login({username, password});
+        } catch (error) {
+            Alert.alert('Login', error.message);
         }
     }
+
+    useEffect(() => {
+        if (user._id) {
+            navigation.navigate('Home');
+        }
+    }, [user]);
 
     return (
         <SafeAreaView style={styles.container}>
