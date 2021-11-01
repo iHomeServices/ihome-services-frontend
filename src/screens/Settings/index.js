@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react';
 
 import {Pressable, Text, View} from 'react-native';
 import { Switch } from 'react-native-gesture-handler';
@@ -24,6 +25,19 @@ export function Settings({navigation}) {
         navigation.navigate('Login');
         logout();
     }
+
+    async function loadTheme() {
+        const chosenTheme = await AsyncStorage.getItem('theme');
+        if(chosenTheme === 'dark'){
+            setChangeTheme(false);
+        }else{
+            setChangeTheme(true);
+        }
+    }
+
+    useEffect(() => {
+        loadTheme();
+    }, []);
 
     return (
         <SafeAreaView style={styles(theme).container}>
