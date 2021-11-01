@@ -4,7 +4,6 @@ import { Text, View, StatusBar, Linking, Alert } from 'react-native';
 import { styles } from './styles';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { Image } from 'react-native-elements';
-import { theme } from '../../global/styles/theme';
 import { RoundButton } from '../../components/RoundButton';
 import { FluidButton } from '../../components/FluidButton';
 import { HeaderProfile } from '../../components/HeaderProfile';

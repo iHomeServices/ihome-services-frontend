@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 import { Alert, Text, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import backendAPI from '../../api/backend';
 import { FluidButton } from '../../components/FluidButton';
 import { Input } from '../../components/Input';
 import { PickerField } from '../../components/PickerField';
 import { RoundButton } from '../../components/RoundButton';
-import { theme } from '../../global/styles/theme';
 import { useAuth } from '../../hooks/auth';
 import { useTheme } from '../../hooks/theme';
 

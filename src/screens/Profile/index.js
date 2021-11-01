@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Modal, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import backendAPI from '../../api/backend';
 import { styles } from './styles';
 import { HeaderProfile } from '../../components/HeaderProfile';
 import { RoundButton } from '../../components/RoundButton';
-import backendAPI from '../../api/backend';
 import { RatingService } from '../../components/RatingService';
 import { useAuth } from '../../hooks/auth';
 import { Loader } from '../../components/AnimatedLoader';
@@ -15,7 +15,7 @@ export function Profile({ navigation }) {
     const {user} = useAuth();
     const {theme} = useTheme();
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [isModalRatingOpen, setIsModalRatingOpen] = useState(false);
     const [endingService, setEndingService] = useState('');
     const [userProfile, setUserProfile] = useState({});

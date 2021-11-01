@@ -3,11 +3,11 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import {Pressable, Text, View} from 'react-native';
 import { Rating } from 'react-native-elements';
-import { theme } from '../../global/styles/theme';
 import { FluidButton } from '../FluidButton';
 import { Input } from '../Input';
 
 import {styles} from './styles';
+import { useTheme } from '../../hooks/theme';
 
 export function RatingService({
     handleRating,

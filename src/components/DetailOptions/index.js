@@ -9,42 +9,42 @@ import { useTheme } from '../../hooks/theme';
 import { Comments } from '../Comments';
 import {styles} from './styles';
 
-export function ItemOption({title, icon, isActive, onPressItem}) {
-    const {theme} = useTheme();
-
-    return (
-        <TouchableWithoutFeedback 
-            onPress={onPressItem}
-            style={styles(theme).item}>
-            <Feather 
-                style={[
-                    styles(theme).icon, 
-                    isActive ? styles(theme).active : ''
-                ]}
-                name={icon} 
-                size={32} />
-
-            <Text style={[
-                styles(theme).title, 
-                isActive ? styles(theme).active : ''
-            ]}>
-                {title}
-            </Text>
-        </TouchableWithoutFeedback>
-    );
-}
-
 export function DetailOptions({
     description,
     comments
 }) {
+    const {theme} = useTheme();
+    const [activatedItem, setActivatedItem] = useState(1);
+
     const options = [
         {id: 1, title: 'Descrição', icon: 'info'},
         {id: 2, title: 'Avaliações', icon: 'message-square'},
         {id: 3, title: 'Compartilhar', icon: 'share-2', callback: shareDescription },
     ];
 
-    const [activatedItem, setActivatedItem] = useState(1);
+    function ItemOption({title, icon, isActive, onPressItem}) {
+    
+        return (
+            <TouchableWithoutFeedback 
+                onPress={onPressItem}
+                style={styles(theme).item}>
+                <Feather 
+                    style={[
+                        styles(theme).icon, 
+                        isActive ? styles(theme).active : ''
+                    ]}
+                    name={icon} 
+                    size={32} />
+    
+                <Text style={[
+                    styles(theme).title, 
+                    isActive ? styles(theme).active : ''
+                ]}>
+                    {title}
+                </Text>
+            </TouchableWithoutFeedback>
+        );
+    }
 
     function shareDescription() {
         // share description in whatsapp
