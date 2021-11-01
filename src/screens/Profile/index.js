@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Modal, Pressable, ScrollView, Text, View } from 'react-native';
+import { Alert, FlatList, Modal, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import backendAPI from '../../api/backend';
@@ -10,6 +10,7 @@ import { RatingService } from '../../components/RatingService';
 import { useAuth } from '../../hooks/auth';
 import { Loader } from '../../components/AnimatedLoader';
 import { useTheme } from '../../hooks/theme';
+import { ItemOption } from '../../components/DetailOptions';
 
 export function Profile({ navigation }) {
     const {user} = useAuth();
@@ -20,11 +21,15 @@ export function Profile({ navigation }) {
     const [endingService, setEndingService] = useState('');
     const [userProfile, setUserProfile] = useState({});
 
+    const [activatedItem, setActivatedItem] = useState(1);
+
     async function getProviderById(){
         try{
             const response = await backendAPI.get(`/provider/${user._id}`);
             setUserProfile(response.data);
-            console.log(user._id, response.data);
+            // console.log(user._id, response.data);
+
+            // console.log(userProfile.services)
         }catch(err){
             Alert.alert('Erro', 'Erro ao buscar serviços');
         }
@@ -85,6 +90,62 @@ export function Profile({ navigation }) {
         }
     }
 
+    function findCategory(id){
+        return global.CATEGORIES.find(service => service._id === id);
+    }
+    
+    function findProvider(id){
+        return global.PROVIDERS.find(provider => provider._id === id);
+    }
+
+    function InProgressService(props){
+        const provider = findProvider(props.item.idProvider);
+        const category = findCategory(provider?.categoryId);
+
+        console.log(props.item.isDone);
+        if(
+            (props.item.isDone && activatedItem == 2)
+            || (!props.item.isDone && activatedItem == 1)
+        ){
+            return (
+                <View style={styles(theme).card}>
+                    <View>
+                        <Text style={styles(theme).text}>
+                            Profissional: {provider.name}
+                        </Text>
+                        <Text style={styles(theme).text}>
+                            Categoria: {category?.name}
+                        </Text>
+                        <Text style={styles(theme).text}>
+                            Início em: {props.item.startDate}
+                        </Text>
+                    </View>
+                    {
+                        !props.item.isDone &&
+                        <View style={styles(theme).rowButtonContainer}>
+                            <Pressable 
+                                onPress={() => handleCancelService(props.item._id)} // colocar no parametro o id do serviço
+                                style={[styles(theme).outlineButton, styles(theme).borderDanger]}>
+                                <Text style={styles(theme).textDanger}>
+                                    Cancelar
+                                </Text>
+                            </Pressable>
+                            <Pressable 
+                                onPress={() => handleFinishService(props.item._id)} // colocar no parametro o id do serviço
+                                style={[styles(theme).outlineButton, styles(theme).borderSecondary]}>
+                                <Text style={styles(theme).textSecondary}>
+                                    Finalizar
+                                </Text>
+                            </Pressable>
+                        </View>
+                    }
+                </View>
+            )
+        }else{
+            return null;
+        }
+    }
+
     useEffect(() => {
         // encontrar serviços do usuario que estão em andamento e finalizados
         getProviderById();
@@ -92,7 +153,7 @@ export function Profile({ navigation }) {
 
     return (
         <>
-            <SafeAreaView style={styles(theme).container} >
+            <SafeAreaView style={styles(theme).container}>
                 <Loader visible={isLoading} />
                 <View style={styles(theme).header}>
                     <RoundButton
@@ -108,72 +169,59 @@ export function Profile({ navigation }) {
                 </View>
 
                 <View style={styles(theme).contentContainer}>
-                    <ScrollView>
-
-                        <View style={styles(theme).card}>
-                            <Text style={styles(theme).title}>
-                                Meus dados
-                            </Text>
-
-                            <View>
-                                <Text style={styles(theme).text}>
-                                    Email: {userProfile.email ? userProfile.email : 'Não informado'}
-                                </Text>
-                                <Text style={styles(theme).text}>
-                                    Fone: {userProfile.phoneNumber ? userProfile.phoneNumber : 'Não informado'}
-                                </Text>
-                            </View>
-                            
-                            <View style={styles(theme).buttonContainer}>
-                                <Pressable
-                                    onPress={() => navigation.navigate('EditProfile', {
-                                        userProfile
-                                    })}>
-                                    <Text style={styles(theme).buttonText}>
-                                        Editar dados
-                                    </Text>
-                                </Pressable>
-                            </View>
-                        </View>
-
-                        <Text style={styles(theme).heading}>
-                            Em andamento
+                    <View style={styles(theme).card}>
+                        <Text style={styles(theme).title}>
+                            Meus dados
                         </Text>
 
-                        <View style={styles(theme).card}>
-                            <View style={{
-                                marginBottom: 20,
-                            }}>
-                                <Text style={styles(theme).text}>
-                                    Profissional: José Rezende
-                                </Text>
-                                <Text style={styles(theme).text}>
-                                    Categoria: Eletricista
-                                </Text>
-                                <Text style={styles(theme).text}>
-                                    Início em: 10/10/2021
-                                </Text>
-                            </View>
-
-                            <View style={styles(theme).rowButtonContainer}>
-                                <Pressable 
-                                    onPress={() => handleCancelService()} // colocar no parametro o id do serviço
-                                    style={[styles(theme).outlineButton, styles(theme).borderDanger]}>
-                                    <Text style={styles(theme).textDanger}>
-                                        Cancelar
-                                    </Text>
-                                </Pressable>
-                                <Pressable 
-                                    onPress={() => handleFinishService()} // colocar no parametro o id do serviço
-                                    style={[styles(theme).outlineButton, styles(theme).borderSecondary]}>
-                                    <Text style={styles(theme).textSecondary}>
-                                        Finalizar
-                                    </Text>
-                                </Pressable>
-                            </View>
+                        <View>
+                            <Text style={styles(theme).text}>
+                                Email: {userProfile.email ? userProfile.email : 'Não informado'}
+                            </Text>
+                            <Text style={styles(theme).text}>
+                                Fone: {userProfile.phoneNumber ? userProfile.phoneNumber : 'Não informado'}
+                            </Text>
                         </View>
+                        
+                        <View style={styles(theme).buttonContainer}>
+                            <Pressable
+                                onPress={() => navigation.navigate('EditProfile', {
+                                    userProfile
+                                })}>
+                                <Text style={styles(theme).buttonText}>
+                                    Editar dados
+                                </Text>
+                            </Pressable>
+                        </View>
+                    </View>
 
-                    </ScrollView>
+                    <View style={styles(theme).optionsService}>
+                        <ItemOption
+                            isActive={activatedItem === 1}
+                            title={"Em andamento"}
+                            vector="MaterialCommunityIcons"
+                            icon={"progress-wrench"}
+                            onPressItem={() => {
+                                setActivatedItem(1)
+                            }} />
+                        <ItemOption
+                            isActive={activatedItem === 2}
+                            title={"Finalizados"}
+                            icon={"check-circle"}
+                            onPressItem={() => {
+                                setActivatedItem(2)
+                            }} />
+                    </View>
+
+                    <FlatList data={userProfile.services}
+                        style={styles.container}
+                        renderItem={InProgressService}
+                        ListEmptyComponent={<View style={styles(theme).emptyContainer}>
+                            <Text style={styles(theme).emptyText}>Não foi encontrado</Text>
+                        </View>}
+                        vertical={true}
+                        keyExtractor={item => item._id} />
+
                 </View>
             </SafeAreaView>
 

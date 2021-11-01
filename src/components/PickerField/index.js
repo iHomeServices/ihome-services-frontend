@@ -19,7 +19,10 @@ export function PickerField({items, label, ...rest}) {
                     {...rest} 
                 >
                     {items.map((item, index) => (
-                        <Picker.Item key={index} label={item} value={item} />
+                        <Picker.Item key={item._id || index} 
+                            label={item.name || item} 
+                            value={item._id || item} 
+                        />
                     ))}
                 </Picker>
             </View>

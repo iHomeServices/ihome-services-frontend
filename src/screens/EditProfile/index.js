@@ -55,6 +55,10 @@ export function EditProfile({ route, navigation}) {
     const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
     const [email, setEmail] = useState(user.email);	
 
+    const [category, setCategory] = useState(user.category);
+    const [description, setDescription] = useState(user.description);
+    const [images, setImages] = useState(user.images);
+
     
     async function onEditProfile() {
         try {
@@ -125,6 +129,27 @@ export function EditProfile({ route, navigation}) {
                 value={email}
                 onChangeText={(text) => setEmail(text)}
                 label="E-mail" />
+
+            {
+                user.isProvider &&
+                <>
+
+                    <PickerField
+                        label="Categoria"
+                        items={global.CATEGORIES}
+                        selectedValue={category}
+                        onValueChange={(itemValue, itemIndex) => {
+                            setCategory(itemValue);
+                        }
+                    } />
+                    <Input 
+                        value={description}
+                        onChangeText={(text) => setDescription(text)}
+                        multiline={true}
+                        numberOfLines={4}
+                        label="Descrição" />
+                </>
+            }
 
             <FluidButton
                 text="Salvar"

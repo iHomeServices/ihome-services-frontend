@@ -3,11 +3,43 @@ import React, {useState} from 'react';
 import {Alert, Linking, Text, View} from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Feather from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {Description} from '../../components/Description';
 import { useTheme } from '../../hooks/theme';
 import { Comments } from '../Comments';
 import {styles} from './styles';
+
+export function ItemOption({title, icon, isActive, vector = 'Feather', onPressItem}) {
+    const {theme} = useTheme();
+
+    const vectorComponent = {
+        'Feather': Feather,
+        'MaterialCommunityIcons': MaterialCommunityIcons,
+    }
+
+    const Icon = vectorComponent[vector];
+    return (
+        <TouchableWithoutFeedback 
+            onPress={onPressItem}
+            style={styles(theme).item}>
+            <Icon
+                style={[
+                    styles(theme).icon, 
+                    isActive ? styles(theme).active : ''
+                ]}
+                name={icon} 
+                size={32} />
+
+            <Text style={[
+                styles(theme).title, 
+                isActive ? styles(theme).active : ''
+            ]}>
+                {title}
+            </Text>
+        </TouchableWithoutFeedback>
+    );
+}
 
 export function DetailOptions({
     description,
@@ -21,30 +53,6 @@ export function DetailOptions({
         {id: 2, title: 'Avaliações', icon: 'message-square'},
         {id: 3, title: 'Compartilhar', icon: 'share-2', callback: shareDescription },
     ];
-
-    function ItemOption({title, icon, isActive, onPressItem}) {
-    
-        return (
-            <TouchableWithoutFeedback 
-                onPress={onPressItem}
-                style={styles(theme).item}>
-                <Feather 
-                    style={[
-                        styles(theme).icon, 
-                        isActive ? styles(theme).active : ''
-                    ]}
-                    name={icon} 
-                    size={32} />
-    
-                <Text style={[
-                    styles(theme).title, 
-                    isActive ? styles(theme).active : ''
-                ]}>
-                    {title}
-                </Text>
-            </TouchableWithoutFeedback>
-        );
-    }
 
     function shareDescription() {
         // share description in whatsapp
