@@ -13,14 +13,15 @@ export function RatingService({
     handleRating,
     handleClose,
 }) {
+    const {theme} = useTheme();
     const [rating, setRating] = React.useState(0);
     const [comment, setComment] = React.useState('');
 
     return (
-        <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-                <View style={styles.header}>
-                    <Text style={styles.title}>
+        <View style={styles(theme).centeredView}>
+            <View style={styles(theme).modalView}>
+                <View style={styles(theme).header}>
+                    <Text style={styles(theme).title}>
                         Avaliar
                     </Text>
                     
@@ -39,7 +40,7 @@ export function RatingService({
                     ratingBackgroundColor={theme.colors.dark}                 
                     startingValue={5} />
                     
-                <View style={styles.textareaContainer}>
+                <View style={styles(theme).textareaContainer}>
                     <Input
                         label='Comentário'
                         value={comment}

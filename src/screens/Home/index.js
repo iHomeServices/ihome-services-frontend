@@ -14,38 +14,40 @@ import { Image } from 'react-native-elements/dist/image/Image';
 import default_avatar from '../../assets/default_avatar.png';
 
 import { styles } from './styles';
-import { theme } from '../../global/styles/theme';
+import { useAuth } from '../../hooks/auth';
 import backendAPI from '../../api/backend';
 import { Loader } from '../../components/AnimatedLoader';
-import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
 
-export function Home({ route, navigation }) {
-  const [categoryId, setCategoryId] = useState('');
-  const [providers, setProviders] = useState([]);
-  const [categories, setCategories] = useState([]);
-
+export function Home({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [categoryId, setCategoryId] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [providers, setProviders] = useState([]);
 
   const {user} = useAuth();
+  const {theme} = useTheme();
 
-  const avatar = user.avatar ? user.avatar : default_avatar;
+  const avatar = user.avatar ? { uri: user.avatar } : default_avatar;
 
   const handleChangeCategory = (id) => {
     setCategoryId(id);
   }
 
   const handleProfileClick = () => {
-    navigation.navigate('Profile', {
-      user: user
-    });
-  }
+    navigation.navigate('Profile');
+  }  
 
   async function getCategories() {
     try {
       let response = await backendAPI.get('/category');
-      const categoriesResponse = response.data;
+      const categoriesResponse = response.data || [];
+      global.CATEGORIES = categoriesResponse;
       setCategories(categoriesResponse);
-      setCategoryId(categoriesResponse[0]._id);
+      handleChangeCategory(categoriesResponse[0]._id);
+      if(!global.CATEGORIES.length) {
+        Alert.alert('Erro', 'Não foi possível carregar os dados');
+      }
     } catch (error) {
       console.log(`Couldn't get categories`, error.message);
     }
@@ -54,36 +56,49 @@ export function Home({ route, navigation }) {
   async function getProviders() {
     try {
       let response = await backendAPI.get('/provider');
-      setProviders(response.data);
-      setIsLoading(false);
+      const providersResponse = response.data || [];
+      global.PROVIDERS = providersResponse;
+      setProviders(providersResponse);
     } catch (error) {
       console.log(`Couldn't get providers`, error.message);
     }
+  }
 
+  async function getCustomers() {
+    try {
+      let response = await backendAPI.get('/customer');
+      global.CUSTOMERS = response.data || [];
+    } catch (error) {
+      console.log(`Couldn't get customer`, error.message);
+    }
   }
 
   useEffect(() => {
     getCategories();
 
     getProviders();
+
+    getCustomers();
+
+    setIsLoading(false);
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles(theme).container}>
       <Loader visible={isLoading} />
 
-      <View style={styles.header}>
-        <View style={styles.row}>
+      <View style={styles(theme).header}>
+        <View style={styles(theme).row}>
           <Image
             source={avatar}
-            style={styles.avatar}
+            style={styles(theme).avatar}
             onPress={handleProfileClick}
             PlaceholderContent={<ActivityIndicator size="small" color="#fff" />} />
         </View>
 
-        <View style={styles.row}>
+        <View style={styles(theme).row}>
           <FeatherIcon
-            style={styles.pr10}
+            style={styles(theme).pr10}
             size={23}
             color={theme.colors.dark}
             name={"bell"} />
@@ -99,14 +114,14 @@ export function Home({ route, navigation }) {
         </View>
       </View>
 
-      <View style={styles.categoriesContainer}>
+      <View style={styles(theme).categoriesContainer}>
         <Categories
           selectedCategory={categoryId}
           categories={categories}
           handleChangeCategory={handleChangeCategory} />
       </View>
 
-      <View style={styles.providerContainer}>
+      <View style={styles(theme).providerContainer}>
         <Providers
           categoryId={categoryId}
           providers={providers}

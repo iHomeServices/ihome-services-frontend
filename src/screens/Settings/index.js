@@ -1,24 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {Pressable, Text, View} from 'react-native';
 import { Switch } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RoundButton } from '../../components/RoundButton';
-import { theme } from '../../global/styles/theme';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
 
 import {styles} from './styles';
 
 export function Settings({navigation}) {
     const {logout} = useAuth();
+    const {theme, toggleTheme} = useTheme();
+
+    const [changeTheme, setChangeTheme] = useState(false);
+
+    function handleChangeTheme() {
+        setChangeTheme(!changeTheme);
+        toggleTheme(changeTheme);
+    }
 
     function handleLogout(){
         navigation.navigate('Login');
         logout();
     }
+
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
+        <SafeAreaView style={styles(theme).container}>
+            <View style={styles(theme).header}>
                 <RoundButton
                     iconName="keyboard-arrow-left"
                     iconColor={theme.colors.dark}
@@ -27,34 +36,29 @@ export function Settings({navigation}) {
                     noShadow
                 />
 
-                <Text style={styles.title}>Configurações</Text>
+                <Text style={styles(theme).title}>Configurações</Text>
             </View>
 
-            <View style={styles.content}>
-                <View style={styles.item}>
-                    <Pressable style={styles.rowSpaceBetween}>
-                        <Text style={[styles.itemText]}>
-                            Mudar tema
-                        </Text>
-                        <Switch
-                            value={true}
-                            onValueChange={(value) => {}}
-                        />
-                    </Pressable>
+            <View style={styles(theme).content}>
+                <View style={styles(theme).rowSpaceBetween}>
+                    <Text style={[styles(theme).itemText]}>
+                        Mudar tema
+                    </Text>
+                    <Switch
+                        value={changeTheme}
+                        onValueChange={handleChangeTheme}
+                    />
                 </View>
             </View>
 
-            <View style={styles.content}>
-                <View style={styles.item}>
-                    
-                    <Pressable
-                        onPress={handleLogout}
-                    >
-                        <Text style={[styles.itemText, styles.logoutText]}>
-                            Sair do app
-                        </Text>
-                    </Pressable>
-                </View>
+            <View style={styles(theme).content}>
+                <Pressable
+                    onPress={handleLogout}
+                >
+                    <Text style={[styles(theme).itemText, styles(theme).logoutText]}>
+                        Sair do app
+                    </Text>
+                </Pressable>
             </View>
         </SafeAreaView>
     );

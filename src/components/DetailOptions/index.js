@@ -5,25 +5,28 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Feather from 'react-native-vector-icons/Feather';
 
 import {Description} from '../../components/Description';
+import { useTheme } from '../../hooks/theme';
 import { Comments } from '../Comments';
 import {styles} from './styles';
 
 export function ItemOption({title, icon, isActive, onPressItem}) {
+    const {theme} = useTheme();
+
     return (
         <TouchableWithoutFeedback 
             onPress={onPressItem}
-            style={styles.item}>
+            style={styles(theme).item}>
             <Feather 
                 style={[
-                    styles.icon, 
-                    isActive ? styles.active : ''
+                    styles(theme).icon, 
+                    isActive ? styles(theme).active : ''
                 ]}
                 name={icon} 
                 size={32} />
 
             <Text style={[
-                styles.title, 
-                isActive ? styles.active : ''
+                styles(theme).title, 
+                isActive ? styles(theme).active : ''
             ]}>
                 {title}
             </Text>
@@ -62,7 +65,7 @@ export function DetailOptions({
 
     return (
         <>
-            <View style={styles.container}>
+            <View style={styles(theme).container}>
                 {
                     options.map(option => {
                         return <ItemOption

@@ -1,54 +1,108 @@
 import {StyleSheet} from 'react-native';
-import { theme } from '../../global/styles/theme';
+// import { theme } from '../../global/styles/theme';
 
-export const styles = StyleSheet.create({
-    container: {
-        backgroundColor: theme.colors.background,
-        padding: 20,
-        flexGrow: 1
-    },
+export function styles(theme) {
+    return StyleSheet.create({
+        container: {
+            backgroundColor: theme.colors.background,
+            padding: 20,
+            flexGrow: 1
+        },
+    
+        title: {
+            color: theme.colors.secondary,
+            fontFamily: theme.fonts.text500,
+            fontSize: 25,
+            paddingLeft: 20
+        },
+        subtitle: {
+            color: theme.colors.secondary,
+            fontFamily: theme.fonts.text500,
+            fontSize: 20,
+            marginBottom: 20,
+        },
+    
+        header: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 40,
+        },
+    
+        row: {
+            width: '100%',
+            flexDirection: 'row',
+        },
+    
+        pr10: {
+            paddingRight: 10
+        },
+        mb20: {
+            marginBottom: 20
+        },
+    
+        col50:{
+            flexBasis: '50%',
+        },
+    
+        col40:{
+            flexBasis: '40%',
+            paddingRight: 10,
+        },
+    
+        col60:{
+            flexBasis: '60%',
+        },
+    });
+}
 
-    title: {
-        color: theme.colors.secondary,
-        fontFamily: theme.fonts.text500,
-        fontSize: 25,
-        paddingLeft: 20
-    },
-    subtitle: {
-        color: theme.colors.secondary,
-        fontFamily: theme.fonts.text500,
-        fontSize: 20,
-        marginBottom: 20,
-    },
+// export const styles = StyleSheet.create({
+//     container: {
+//         backgroundColor: theme.colors.background,
+//         padding: 20,
+//         flexGrow: 1
+//     },
 
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 40,
-    },
+//     title: {
+//         color: theme.colors.secondary,
+//         fontFamily: theme.fonts.text500,
+//         fontSize: 25,
+//         paddingLeft: 20
+//     },
+//     subtitle: {
+//         color: theme.colors.secondary,
+//         fontFamily: theme.fonts.text500,
+//         fontSize: 20,
+//         marginBottom: 20,
+//     },
 
-    row: {
-        width: '100%',
-        flexDirection: 'row',
-    },
+//     header: {
+//         flexDirection: 'row',
+//         alignItems: 'center',
+//         marginBottom: 40,
+//     },
 
-    pr10: {
-        paddingRight: 10
-    },
-    mb20: {
-        marginBottom: 20
-    },
+//     row: {
+//         width: '100%',
+//         flexDirection: 'row',
+//     },
 
-    col50:{
-        flexBasis: '50%',
-    },
+//     pr10: {
+//         paddingRight: 10
+//     },
+//     mb20: {
+//         marginBottom: 20
+//     },
 
-    col40:{
-        flexBasis: '40%',
-        paddingRight: 10,
-    },
+//     col50:{
+//         flexBasis: '50%',
+//     },
 
-    col60:{
-        flexBasis: '60%',
-    },
-});
+//     col40:{
+//         flexBasis: '40%',
+//         paddingRight: 10,
+//     },
+
+//     col60:{
+//         flexBasis: '60%',
+//     },
+// });

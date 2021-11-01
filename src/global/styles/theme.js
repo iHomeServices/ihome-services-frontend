@@ -4,7 +4,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-const colorsLight = {
+export const colorsLight = {
     primary: '#46D0D9',
     secondary: '#13497B',
     background: '#F8FBFF',
@@ -26,7 +26,7 @@ const colorsLight = {
     lightGray: '#F0F0F0'
 }
 
-const colorsDark = {
+export const colorsDark = {
     primary: '#5088D9',
     secondary: '#E2E8F0',
     background: '#171923',

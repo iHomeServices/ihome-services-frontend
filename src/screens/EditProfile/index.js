@@ -10,11 +10,17 @@ import { PickerField } from '../../components/PickerField';
 import { RoundButton } from '../../components/RoundButton';
 import { theme } from '../../global/styles/theme';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
 
 import { styles } from './styles';
 
 export function EditProfile({ route, navigation}) {
-    const {user, setUser} = useAuth();
+    const user = route.params.userProfile;
+
+    const {setUser} = useAuth();
+    const {theme} = useTheme();
+
+    // ver se o user é isProvider e adicionar campos Descrição, categoria e imagens
 
     const states = [
         'AC',
@@ -46,21 +52,18 @@ export function EditProfile({ route, navigation}) {
         'TO',
     ];
 
-    const [state, setState] = useState(states[0]);
-    const [city, setCity] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');	
+    const [state, setState] = useState(user.state);
+    const [city, setCity] = useState(user.city);
+    const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
+    const [email, setEmail] = useState(user.email);	
 
-    useEffect(() => {
-        // buscar dados do usuário
-    }, []);
     
     async function onEditProfile() {
         try {
             let formData = {
                 state,
                 city,
-                phone,
+                phoneNumber,
                 email
             } 
 
@@ -84,8 +87,8 @@ export function EditProfile({ route, navigation}) {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
+        <SafeAreaView style={styles(theme).container}>
+            <View style={styles(theme).header}>
                 <RoundButton
                     iconName="keyboard-arrow-left"
                     iconColor={theme.colors.dark}
@@ -94,11 +97,11 @@ export function EditProfile({ route, navigation}) {
                     noShadow
                 />
 
-                <Text style={styles.title}>Editar Perfil</Text>
+                <Text style={styles(theme).title}>Editar Perfil</Text>
             </View>
 
-            <View style={[styles.row]}>
-                <View style={styles.col40}>
+            <View style={[styles(theme).row]}>
+                <View style={styles(theme).col40}>
                     <PickerField
                         label="UF"
                         items={states}
@@ -107,7 +110,7 @@ export function EditProfile({ route, navigation}) {
                             setState(itemValue);
                         }} />
                 </View>
-                <View style={styles.col60}>
+                <View style={styles(theme).col60}>
                     <Input 
                         value={city}
                         onChangeText={(text) => setCity(text)}
@@ -116,8 +119,8 @@ export function EditProfile({ route, navigation}) {
             </View>
 
             <Input 
-                value={phone}
-                onChangeText={(text) => setPhone(text)}
+                value={phoneNumber}
+                onChangeText={(text) => setPhoneNumber(text)}
                 label="Telefone" />
 
             <Input 

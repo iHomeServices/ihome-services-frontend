@@ -5,6 +5,7 @@ import {
     View,
     Text
 } from 'react-native';
+import { useTheme } from '../../hooks/theme';
 import { CommentItem } from '../CommentItem';
 
 import { styles } from './styles';
@@ -41,6 +42,8 @@ const DATA = [
 ]
 
 export function Comments({comments}){
+    const {theme} = useTheme();
+
     const renderItem = ({ item }) => (
         <CommentItem item={item} />
     );

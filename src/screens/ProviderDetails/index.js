@@ -11,9 +11,12 @@ import { HeaderProfile } from '../../components/HeaderProfile';
 import { DetailOptions } from '../../components/DetailOptions';
 import backendAPI from '../../api/backend';
 import { Loader } from '../../components/AnimatedLoader';
+import { useTheme } from '../../hooks/theme';
 
 export function ProviderDetails({ route, navigation }) {
     const providerId = route.params.providerId;
+
+    const {theme} = useTheme()
     const [provider, setProvider] = useState({});
     const [activeSlide, setActiveSlide] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
@@ -32,12 +35,12 @@ export function ProviderDetails({ route, navigation }) {
             let providerResponse = await backendAPI.get(`/provider/${providerId}`);
             setProvider(providerResponse.data);
             setIsLoading(false);
-            console.log(providerResponse.data)
         } catch (error) {
             console.log(error);
         }
     }
 
+    // separar botões: Conversar profissinal, e outro botão de contratar
     function handleHiring() {
         const message = `Olá, gostaria de contratar você para realizar um serviço.`;
         const urlWhatsapp = `whatsapp://send?text=${message}&phone=${provider.phoneNumber}`
@@ -67,7 +70,7 @@ export function ProviderDetails({ route, navigation }) {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <View style={styles(theme).container}>
             <Loader visible={isLoading} />
 
             <StatusBar
@@ -76,9 +79,9 @@ export function ProviderDetails({ route, navigation }) {
                 barStyle={'light-content'}
                 showHideTransition={'none'} />
 
-            <View style={styles.carouselContainer}>
-                <View style={styles.carouselTopBarContainer}>
-                    <View style={styles.carouselControlRow}>
+            <View style={styles(theme).carouselContainer}>
+                <View style={styles(theme).carouselTopBarContainer}>
+                    <View style={styles(theme).carouselControlRow}>
                         <RoundButton
                             iconName="keyboard-arrow-left"
                             iconColor={theme.colors.dark}
@@ -92,16 +95,16 @@ export function ProviderDetails({ route, navigation }) {
                     </View>
                 </View>
 
-                <View style={styles.wh100}>
+                <View style={styles(theme).wh100}>
                     <Carousel
                         data={entries}
                         sliderWidth={theme.metrics.screenWidth}
                         itemWidth={theme.metrics.screenWidth}
                         renderItem={(data) => {
                             return (
-                                <View style={styles.carouselItemContainer}>
+                                <View style={styles(theme).carouselItemContainer}>
                                     <Image
-                                        style={styles.carouselItemImage}
+                                        style={styles(theme).carouselItemImage}
                                         source={{ uri: data.item.illustration }} />
                                 </View>
                             )
@@ -112,16 +115,16 @@ export function ProviderDetails({ route, navigation }) {
                 <Pagination
                     dotsLength={entries.length}
                     activeDotIndex={activeSlide}
-                    containerStyle={styles.dotContainer}
-                    dotStyle={[styles.dotStructure, styles.dotPrimary]}
-                    inactiveDotStyle={[styles.dotStructure, styles.dotInactive]}
+                    containerStyle={styles(theme).dotContainer}
+                    dotStyle={[styles(theme).dotStructure, styles(theme).dotPrimary]}
+                    inactiveDotStyle={[styles(theme).dotStructure, styles(theme).dotInactive]}
                     inactiveDotOpacity={1}
                     inactiveDotScale={1}
                 />
             </View>
 
-            <View style={styles.contentContainer}>
-                <View style={styles.detailsContainer}>
+            <View style={styles(theme).contentContainer}>
+                <View style={styles(theme).detailsContainer}>
                     <HeaderProfile provider={provider} />
                     <DetailOptions 
                         comments={provider.services}
@@ -129,11 +132,11 @@ export function ProviderDetails({ route, navigation }) {
                 </View>
             </View>
 
-            <View style={styles.footer}>
-                <Text style={styles.heading}>
+            <View style={styles(theme).footer}>
+                <Text style={styles(theme).heading}>
                     {provider.price}
                 </Text>
-                <View style={styles.w60}>
+                <View style={styles(theme).w60}>
                     <FluidButton
                         onPress={handleHiring}
                         text={"Contratar"} />

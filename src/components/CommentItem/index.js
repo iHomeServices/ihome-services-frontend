@@ -5,22 +5,24 @@ import {
     View
 } from 'react-native';
 import { Rating } from 'react-native-elements';
-import { theme } from '../../global/styles/theme';
+import { useTheme } from '../../hooks/theme';
 
 import { styles } from './styles';
 
 export function CommentItem({item}){
+    const {theme} = useTheme();
+
     return (
-        <View style={styles.container}>
-            <View style={styles.card}>
-                <Text style={styles.name}>
+        <View style={styles(theme).container}>
+            <View style={styles(theme).card}>
+                <Text style={styles(theme).name}>
                     {item.nameCustomer}
                 </Text>
-                <Text style={styles.comment}>
+                <Text style={styles(theme).comment}>
                     {item.comment || '(Sem comentário)'}
                 </Text>
 
-                <View style={styles.rating}>
+                <View style={styles(theme).rating}>
                     <Rating
                         type='custom'
                         readonly
@@ -29,7 +31,7 @@ export function CommentItem({item}){
                         tintColor={theme.colors.white}   
                         ratingBackgroundColor={theme.colors.lightGray}                 
                         startingValue={item.rating} />
-                    <Text style={styles.ratingText}>
+                    <Text style={styles(theme).ratingText}>
                         {item.rating}
                     </Text>
                 </View>

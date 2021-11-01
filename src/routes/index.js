@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator();
 
 export function Routes(){
     const {user} = useAuth();
-    console.log("user persistente asyncstorage", user);
+    console.log("user persistence asyncstorage", user);
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Login">

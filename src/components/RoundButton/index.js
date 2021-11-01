@@ -2,6 +2,7 @@ import React from 'react';
 
 import { RectButton } from 'react-native-gesture-handler';
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useTheme } from '../../hooks/theme';
 
 import {styles} from './styles';
 
@@ -12,11 +13,14 @@ export function RoundButton({
     noShadow,
     ...rest
 }) {
+    
+    const {theme} = useTheme();
+
     return (
         <RectButton 
             style={[
-                styles.container,
-                noShadow ? null : styles.shadow
+                styles(theme).container,
+                noShadow ? null : styles(theme).shadow
             ]}
             {...rest}
         >

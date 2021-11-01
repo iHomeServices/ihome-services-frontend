@@ -7,8 +7,11 @@ import { styles } from './styles';
 import { FluidButton } from '../../components/FluidButton';
 import { Input } from '../../components/Input';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
 
 export function Login({ navigation }) {
+    const {theme} = useTheme();
+    
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -18,11 +21,8 @@ export function Login({ navigation }) {
         if(!username || !password) {
             return;
         }
-        try {
-            await login({username, password});
-        } catch (error) {
-            Alert.alert('Login', error.message);
-        }
+        
+        await login({username, password});
     }
 
     useEffect(() => {
@@ -32,24 +32,24 @@ export function Login({ navigation }) {
     }, [user]);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles(theme).container}>
             <ScrollView>
-                <View style={styles.logoContainer}>
+                <View style={styles(theme).logoContainer}>
                     <FullLogo width={"60%"} height={300} />
                 </View>
 
-                <View style={styles.section}>
-                    <View style={styles.article}>
-                        <Text style={styles.title}>
+                <View style={styles(theme).section}>
+                    <View style={styles(theme).article}>
+                        <Text style={styles(theme).title}>
                             Bem-vindo
                         </Text>
-                        <Text style={styles.text}>
+                        <Text style={styles(theme).text}>
                             Faça o login para alcançar mais
                             profissionais
                         </Text>
                     </View>
 
-                    <View style={styles.formGroup}>
+                    <View style={styles(theme).formGroup}>
                         <Input
                             value={username}
                             onChangeText={setUsername}
@@ -66,8 +66,8 @@ export function Login({ navigation }) {
                         isLoading={loading}
                         text="LOGIN" />
 
-                    <View style={styles.footer}>
-                        <Text style={styles.boldText} onPress={() => navigation.navigate('Register')}>
+                    <View style={styles(theme).footer}>
+                        <Text style={styles(theme).boldText} onPress={() => navigation.navigate('Register')}>
                             Criar uma nova conta
                         </Text>
                     </View>

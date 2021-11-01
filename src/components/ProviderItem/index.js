@@ -9,27 +9,29 @@ import { Rating } from 'react-native-elements';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import { styles } from './styles';
-import { theme } from '../../global/styles/theme';
 import { Image } from 'react-native-elements/dist/image/Image';
 import { RoundButton } from '../RoundButton';
+import { useTheme } from '../../hooks/theme';
 
 export function ProviderItem({ provider, handleClickProvider }) {
+    const {theme} = useTheme();
+
     return (
-        <View style={styles.container}>
+        <View style={styles(theme).container}>
             <TouchableWithoutFeedback
-                style={styles.card}
+                style={styles(theme).card}
                 onPress={handleClickProvider}>
                 <View>
 
-                    <View style={styles.row}>
+                    <View style={styles(theme).row}>
                         <Image 
                             source={{uri: provider.avatar }}  
-                            style={styles.avatar}
+                            style={styles(theme).avatar}
                             PlaceholderContent={<ActivityIndicator />} 
                         />
-                        <View style={styles.pl20}>
-                            <Text style={styles.name}>{provider.name}</Text>
-                            <View style={styles.row}>
+                        <View style={styles(theme).pl20}>
+                            <Text style={styles(theme).name}>{provider.name}</Text>
+                            <View style={styles(theme).row}>
                                 <Rating 
                                     type='custom'
                                     readonly
@@ -39,18 +41,18 @@ export function ProviderItem({ provider, handleClickProvider }) {
                                     ratingBackgroundColor={theme.colors.lightGray}                 
                                     startingValue={2.5} />
 
-                                <Text style={styles.opinion}>14 opiniões</Text>
+                                <Text style={styles(theme).opinion}>14 opiniões</Text>
                             </View>
                         </View>
                     </View>
 
                 </View>
-                <View style={styles.priceContainer}>
-                    <Text style={styles.price}>{provider.price}</Text>
+                <View style={styles(theme).priceContainer}>
+                    <Text style={styles(theme).price}>{provider.price}</Text>
                 </View>
             </TouchableWithoutFeedback>
 
-            <View style={styles.favoriteButton}>
+            <View style={styles(theme).favoriteButton}>
                 <RoundButton 
                     iconColor={theme.colors.yellow} 
                     iconName="star-outline" />

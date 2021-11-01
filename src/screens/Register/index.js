@@ -8,8 +8,11 @@ import { FluidButton } from '../../components/FluidButton';
 import { Input } from '../../components/Input';
 import { CheckBox } from 'react-native-elements';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
 
 export function Register({ navigation }) {
+    const {theme} = useTheme()
+
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -41,24 +44,24 @@ export function Register({ navigation }) {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles(theme).container}>
             <ScrollView>
-                <View style={styles.logoContainer}>
+                <View style={styles(theme).logoContainer}>
                     <FullLogo width={"60%"} height={300} />
                 </View>
 
-                <View style={styles.section}>
-                    <View style={styles.article}>
-                        <Text style={styles.title}>
+                <View style={styles(theme).section}>
+                    <View style={styles(theme).article}>
+                        <Text style={styles(theme).title}>
                             Olá
                         </Text>
-                        <Text style={styles.text}>
+                        <Text style={styles(theme).text}>
                             Preencha os campos abaixo para 
                             se cadastrar na plataforma.
                         </Text>
                     </View>
 
-                    <View style={styles.formGroup}>
+                    <View style={styles(theme).formGroup}>
                         <Input 
                             value={name}
                             onChangeText={setName}
@@ -87,8 +90,8 @@ export function Register({ navigation }) {
                         isLoading={loading}
                         text="CADASTRAR" />
 
-                    <View style={styles.footer}>
-                        <Text style={styles.boldText} 
+                    <View style={styles(theme).footer}>
+                        <Text style={styles(theme).boldText} 
                             onPress={toLogin}>
                             Já tenho uma conta!
                         </Text>

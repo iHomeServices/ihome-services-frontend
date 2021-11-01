@@ -2,27 +2,34 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Modal, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useAuth } from '../../hooks/auth';
 import { styles } from './styles';
-import { theme } from '../../global/styles/theme';
 import { HeaderProfile } from '../../components/HeaderProfile';
 import { RoundButton } from '../../components/RoundButton';
 import backendAPI from '../../api/backend';
 import { RatingService } from '../../components/RatingService';
+import { useAuth } from '../../hooks/auth';
+import { Loader } from '../../components/AnimatedLoader';
+import { useTheme } from '../../hooks/theme';
 
-export function Profile({ route, navigation }) {
-    const user = route.params.user;
+export function Profile({ navigation }) {
+    const {user} = useAuth();
+    const {theme} = useTheme();
 
+    const [isLoading, setIsLoading] = useState(false);
     const [isModalRatingOpen, setIsModalRatingOpen] = useState(false);
-    const [endingService, setEndingService] = useState(null);
-    
-    async function findServices(){
+    const [endingService, setEndingService] = useState('');
+    const [userProfile, setUserProfile] = useState({});
+
+    async function getProviderById(){
         try{
             const response = await backendAPI.get(`/provider/${user._id}`);
-            console.log(response.data);
+            setUserProfile(response.data);
+            console.log(user._id, response.data);
         }catch(err){
             Alert.alert('Erro', 'Erro ao buscar serviços');
         }
+
+        setIsLoading(false);
     }
 
     function handleCancelService(id){
@@ -80,13 +87,14 @@ export function Profile({ route, navigation }) {
 
     useEffect(() => {
         // encontrar serviços do usuario que estão em andamento e finalizados
-        findServices();
+        getProviderById();
     }, [])
 
     return (
         <>
-            <SafeAreaView style={styles.container} >
-                <View style={styles.header}>
+            <SafeAreaView style={styles(theme).container} >
+                <Loader visible={isLoading} />
+                <View style={styles(theme).header}>
                     <RoundButton
                         iconName="keyboard-arrow-left"
                         iconColor={theme.colors.dark}
@@ -94,69 +102,71 @@ export function Profile({ route, navigation }) {
                         onPress={() => navigation.goBack()}
                         noShadow
                     />
-                    <View style={styles.profile}>
-                        <HeaderProfile provider={user} />
+                    <View style={styles(theme).profile}>
+                        <HeaderProfile provider={userProfile} />
                     </View>
                 </View>
 
-                <View style={styles.contentContainer}>
+                <View style={styles(theme).contentContainer}>
                     <ScrollView>
 
-                        <View style={styles.card}>
-                            <Text style={styles.title}>
+                        <View style={styles(theme).card}>
+                            <Text style={styles(theme).title}>
                                 Meus dados
                             </Text>
 
                             <View>
-                                <Text style={styles.text}>
-                                    Email: {user.email ? user.email : 'Não informado'}
+                                <Text style={styles(theme).text}>
+                                    Email: {userProfile.email ? userProfile.email : 'Não informado'}
                                 </Text>
-                                <Text style={styles.text}>
-                                    Fone: {user.phone ? user.phone : 'Não informado'}
+                                <Text style={styles(theme).text}>
+                                    Fone: {userProfile.phoneNumber ? userProfile.phoneNumber : 'Não informado'}
                                 </Text>
                             </View>
                             
-                            <View style={styles.buttonContainer}>
+                            <View style={styles(theme).buttonContainer}>
                                 <Pressable
-                                    onPress={() => navigation.navigate('EditProfile')}>
-                                    <Text style={styles.buttonText}>
+                                    onPress={() => navigation.navigate('EditProfile', {
+                                        userProfile
+                                    })}>
+                                    <Text style={styles(theme).buttonText}>
                                         Editar dados
                                     </Text>
                                 </Pressable>
                             </View>
                         </View>
 
-                        <Text style={styles.heading}>
+                        <Text style={styles(theme).heading}>
                             Em andamento
                         </Text>
 
-                        <View style={styles.card}>
+                        <View style={styles(theme).card}>
                             <View style={{
                                 marginBottom: 20,
                             }}>
-                                <Text style={styles.text}>
+                                <Text style={styles(theme).text}>
                                     Profissional: José Rezende
                                 </Text>
-                                <Text style={styles.text}>
+                                <Text style={styles(theme).text}>
                                     Categoria: Eletricista
                                 </Text>
-                                <Text style={styles.text}>
+                                <Text style={styles(theme).text}>
                                     Início em: 10/10/2021
                                 </Text>
                             </View>
 
-                            <View style={styles.rowButtonContainer}>
+                            <View style={styles(theme).rowButtonContainer}>
                                 <Pressable 
                                     onPress={() => handleCancelService()} // colocar no parametro o id do serviço
-                                    style={[styles.outlineButton, styles.borderDanger]}>
-                                    <Text style={styles.textDanger}>
+                                    style={[styles(theme).outlineButton, styles(theme).borderDanger]}>
+                                    <Text style={styles(theme).textDanger}>
                                         Cancelar
                                     </Text>
                                 </Pressable>
                                 <Pressable 
                                     onPress={() => handleFinishService()} // colocar no parametro o id do serviço
-                                    style={[styles.outlineButton, styles.borderSecondary]}>
-                                    <Text style={styles.textSecondary}>
+                                    style={[styles(theme).outlineButton, styles(theme).borderSecondary]}>
+                                    <Text style={styles(theme).textSecondary}>
                                         Finalizar
                                     </Text>
                                 </Pressable>

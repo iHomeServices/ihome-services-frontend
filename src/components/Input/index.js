@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {Text, TextInput, View} from 'react-native';
+import { useTheme } from '../../hooks/theme';
 
 import {styles} from './styles';
 
@@ -10,11 +11,13 @@ export function Input({
     value,
     ...props
 }) {
+    const {theme} = useTheme();
     return (
         <View>
-            <Text style={styles.label}>{label}</Text>
+            <Text style={styles(theme).label}>{label}</Text>
             <TextInput 
-                style={styles.input}
+                value={value}
+                style={styles(theme).input}
                 autoCapitalize='none'
                 keyboardType={type}
                 autoCorrect={false}

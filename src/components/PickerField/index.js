@@ -5,13 +5,15 @@ import {Picker} from '@react-native-picker/picker';
 import {styles} from './styles';
 import { Text, View } from 'react-native';
 import { theme } from '../../global/styles/theme';
+import { useTheme } from '../../hooks/theme';
 
 export function PickerField({items, label, ...rest}) {
-    
+    const {theme} = useTheme()
+
     return (
         <View>
-            <Text style={styles.label}>{label}</Text>
-            <View style={styles.container}>
+            <Text style={styles(theme).label}>{label}</Text>
+            <View style={styles(theme).container}>
                 <Picker 
                     style={{color: theme.colors.text}}
                     {...rest} 

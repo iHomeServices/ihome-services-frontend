@@ -5,6 +5,7 @@ import { useFonts, Rubik_300Light, Rubik_400Regular, Rubik_500Medium } from '@ex
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import {AuthProvider} from './src/hooks/auth';
+import { ThemeProvider } from './src/hooks/theme';
 import { Routes } from './src/routes';
 
 export default function App() {
@@ -18,10 +19,12 @@ export default function App() {
   }
 
   return (
-    <AuthProvider>
-      <SafeAreaProvider>
-        <Routes />
-      </SafeAreaProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <SafeAreaProvider>
+          <Routes />
+        </SafeAreaProvider>
+      </AuthProvider>
+    </ThemeProvider>
   )
 }
