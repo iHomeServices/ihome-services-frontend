@@ -70,7 +70,7 @@ export function Profile({ navigation }) {
 
     async function cancelService(id) {
         try{
-            const response = await backendAPI.delete(`/provider/${id}`);
+            const response = await backendAPI.delete(`/provider/cancel-service/${id}`);
             console.log(response.data);
         }catch(err){
             Alert.alert('Erro', 'Erro ao cancelar serviço');
@@ -80,7 +80,7 @@ export function Profile({ navigation }) {
     async function finishService(formData){
         try{
             // salvar avaliação e finalizar serviço
-            const response = await backendAPI.put(`/finish-service/${endingService}`, {
+            const response = await backendAPI.post(`/provider/finish-service/${endingService}`, {
                 rating: formData.rating,
                 comment: formData.comment
             });

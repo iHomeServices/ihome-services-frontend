@@ -78,7 +78,7 @@ export function Home({ navigation }) {
 
     getProviders();
 
-    // getCustomers();
+    getCustomers();
 
     setIsLoading(false);
   }, []);

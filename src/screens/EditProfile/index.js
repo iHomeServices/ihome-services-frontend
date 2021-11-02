@@ -54,7 +54,6 @@ export function EditProfile({ route, navigation}) {
     const [city, setCity] = useState(user.city);
     const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
     const [email, setEmail] = useState(user.email);	
-
     const [category, setCategory] = useState(user.category);
     const [description, setDescription] = useState(user.description);
     const [images, setImages] = useState(user.images);
@@ -66,11 +65,12 @@ export function EditProfile({ route, navigation}) {
                 state,
                 city,
                 phoneNumber,
-                email
+                email,
+                categoryId: category,
+                description
             } 
 
             const response = await backendAPI.put('/provider/edit/'+user._id, {
-                userId: user._id,
                 ...formData
             });
 
