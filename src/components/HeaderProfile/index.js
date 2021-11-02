@@ -8,8 +8,14 @@ import {styles} from './styles';
 
 export function HeaderProfile({provider}) {
     const {theme} = useTheme();
+    
+    console.log(provider)
 
-    const avatar = provider.avatar ? {uri: provider.avatar} : default_avatar;
+    const uri = provider.avatar?.contentType 
+        ? `data:${provider.avatar?.contentType};base64,${provider.avatar?.image}` 
+        : provider.avatar;
+
+    const avatar = provider.avatar ? { uri: uri } : default_avatar;
 
     return (
         <View style={styles(theme).row}>

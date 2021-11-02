@@ -5,9 +5,9 @@ import {
     Text,
     ActivityIndicator,
 } from 'react-native';
+import default_avatar from '../../assets/default_avatar.png';
 import { Rating } from 'react-native-elements';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-
 import { styles } from './styles';
 import { Image } from 'react-native-elements/dist/image/Image';
 import { RoundButton } from '../RoundButton';
@@ -16,16 +16,21 @@ import { useTheme } from '../../hooks/theme';
 export function ProviderItem({ provider, handleClickProvider }) {
     const {theme} = useTheme();
 
+    const uri = provider.avatar.contentType 
+        ? `data:${provider.avatar.contentType};base64,${provider.avatar.image}` 
+        : provider.avatar;
+
+    const avatar = provider.avatar ? { uri: uri } : default_avatar;
+
     return (
         <View style={styles(theme).container}>
             <TouchableWithoutFeedback
                 style={styles(theme).card}
                 onPress={handleClickProvider}>
                 <View>
-
                     <View style={styles(theme).row}>
                         <Image 
-                            source={{uri: provider.avatar }}  
+                            source={avatar}  
                             style={styles(theme).avatar}
                             PlaceholderContent={<ActivityIndicator />} 
                         />

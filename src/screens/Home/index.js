@@ -28,7 +28,8 @@ export function Home({ navigation }) {
   const {user} = useAuth();
   const {theme} = useTheme();
 
-  const avatar = user.avatar ? { uri: user.avatar } : default_avatar;
+  const base64 = `data:${user.avatar?.contentType};base64,${user.avatar?.image}`
+  const avatar = user.avatar.contentType ? { uri: base64 } : default_avatar;
 
   const handleChangeCategory = (id) => {
     setCategoryId(id);
@@ -62,6 +63,8 @@ export function Home({ navigation }) {
     } catch (error) {
       console.log(`Couldn't get providers`, error.message);
     }
+    
+    setIsLoading(false);
   }
 
   async function getCustomers() {
@@ -79,13 +82,11 @@ export function Home({ navigation }) {
     getProviders();
 
     getCustomers();
-
-    setIsLoading(false);
   }, []);
 
   return (
     <SafeAreaView style={styles(theme).container}>
-      <Loader visible={isLoading} />
+      {/* <Loader visible={isLoading} /> */}
 
       <View style={styles(theme).header}>
         <View style={styles(theme).row}>

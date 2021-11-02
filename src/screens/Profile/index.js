@@ -102,7 +102,6 @@ export function Profile({ navigation }) {
         const provider = findProvider(props.item.idProvider);
         const category = findCategory(provider?.categoryId);
 
-        console.log(props.item.isDone);
         if(
             (props.item.isDone && activatedItem == 2)
             || (!props.item.isDone && activatedItem == 1)

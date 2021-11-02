@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FullLogo from '../../assets/full_logo.svg';
-import { Alert, ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './styles';
@@ -33,46 +33,48 @@ export function Login({ navigation }) {
 
     return (
         <SafeAreaView style={styles(theme).container}>
-            <ScrollView>
-                <View style={styles(theme).logoContainer}>
-                    <FullLogo width={"60%"} height={300} />
-                </View>
-
-                <View style={styles(theme).section}>
-                    <View style={styles(theme).article}>
-                        <Text style={styles(theme).title}>
-                            Bem-vindo
-                        </Text>
-                        <Text style={styles(theme).text}>
-                            Faça o login para alcançar mais
-                            profissionais
-                        </Text>
+            <KeyboardAvoidingView>
+                <ScrollView>
+                    <View style={styles(theme).logoContainer}>
+                        <FullLogo width={"60%"} height={300} />
                     </View>
 
-                    <View style={styles(theme).formGroup}>
-                        <Input
-                            value={username}
-                            onChangeText={setUsername}
-                            label="Usuário" />
-                        <Input
-                            label="Senha"
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry={true} />
-                    </View>
+                    <View style={styles(theme).section}>
+                        <View style={styles(theme).article}>
+                            <Text style={styles(theme).title}>
+                                Bem-vindo
+                            </Text>
+                            <Text style={styles(theme).text}>
+                                Faça o login para alcançar mais
+                                profissionais
+                            </Text>
+                        </View>
 
-                    <FluidButton
-                        onPress={handleLoginClick}
-                        isLoading={loading}
-                        text="LOGIN" />
+                        <View style={styles(theme).formGroup}>
+                            <Input
+                                value={username}
+                                onChangeText={setUsername}
+                                label="Usuário" />
+                            <Input
+                                label="Senha"
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry={true} />
+                        </View>
 
-                    <View style={styles(theme).footer}>
-                        <Text style={styles(theme).boldText} onPress={() => navigation.navigate('Register')}>
-                            Criar uma nova conta
-                        </Text>
+                        <FluidButton
+                            onPress={handleLoginClick}
+                            isLoading={loading}
+                            text="LOGIN" />
+
+                        <View style={styles(theme).footer}>
+                            <Text style={styles(theme).boldText} onPress={() => navigation.navigate('Register')}>
+                                Criar uma nova conta
+                            </Text>
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
