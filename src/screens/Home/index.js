@@ -86,7 +86,7 @@ export function Home({ navigation }) {
 
   return (
     <SafeAreaView style={styles(theme).container}>
-      {/* <Loader visible={isLoading} /> */}
+      <Loader visible={isLoading} />
 
       <View style={styles(theme).header}>
         <View style={styles(theme).row}>

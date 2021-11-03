@@ -1,21 +1,79 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { ActivityIndicator, Image, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Image, Platform, Pressable, Text, View } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import default_avatar from '../../assets/default_avatar.png';
 import { useTheme } from '../../hooks/theme';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { styles } from './styles';
+import backendAPI from '../../api/backend';
 
-import {styles} from './styles';
+export function HeaderProfile({ provider, editPhoto }) {
+    const { theme } = useTheme();
 
-export function HeaderProfile({provider}) {
-    const {theme} = useTheme();
+    const [imageSource, setImageSource] = useState(default_avatar);
+
+    async function requestPermission(){
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+            Alert.alert('Permission to access camera roll is required!');
+        }
+
+        return status
+    }
+
+    async function editPhoto() {
+        const permission = await requestPermission();
+        
+        if (permission !== 'granted') {
+            return
+        }
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 4],
+            // base64: true,
+            quality: 1,
+        });
+
+        // ImagePicker saves the taken photo to disk and returns a local URI to it
+        let localUri = result.uri;
+        let filename = localUri.split('/').pop();
+
+        // Infer the type of the image
+        let match = /\.(\w+)$/.exec(filename);
+        let type = match ? `image/${match[1]}` : `image`;
+
+        // Upload the image using the fetch and FormData APIs
+        let formData = new FormData();
+        formData.append('avatar', { uri: localUri, name: filename, type });
+        
+        const response = await backendAPI.post('/provider/upload-avatar', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        if (response.status === 200) {
+            setImageSource({uri: result.uri});
+        }
+    }
+
+    async function searchAvatar(filename){
+        try{
+            const response = await backendAPI.get(`/avatar/${filename}`);
     
-    console.log(provider)
+            if (response.status === 200) {
+                setImageSource({uri: `data:${response.data.contentType};base64,${response.data.image}`});
+            }
+        }catch(error){
+            setImageSource(default_avatar);
+        }
+    }
 
-    const uri = provider.avatar?.contentType 
-        ? `data:${provider.avatar?.contentType};base64,${provider.avatar?.image}` 
-        : provider.avatar;
-
-    const avatar = provider.avatar ? { uri: uri } : default_avatar;
+    useEffect(() => {
+        searchAvatar(provider.avatar);
+    }, [])
 
     return (
         <View style={styles(theme).row}>
@@ -28,10 +86,18 @@ export function HeaderProfile({provider}) {
                     {provider.state && `, ${provider.state}`}
                 </Text>
             </View>
-            <Image
-                source={avatar}
-                style={styles(theme).avatar}
-                PlaceholderContent={<ActivityIndicator />} />
+            <Pressable onPress={editPhoto}>
+                <Image
+                    source={imageSource}
+                    style={styles(theme).avatar}
+                    PlaceholderContent={<ActivityIndicator />} />
+
+                {editPhoto &&
+                    <MaterialIcons
+                        name="photo-camera"
+                        style={styles(theme).icon} />
+                }
+            </Pressable>
         </View>
     );
 }

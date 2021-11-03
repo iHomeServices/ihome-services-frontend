@@ -163,7 +163,9 @@ export function Profile({ navigation }) {
                         noShadow
                     />
                     <View style={styles(theme).profile}>
-                        <HeaderProfile provider={userProfile} />
+                        <HeaderProfile 
+                            editPhoto={true}
+                            provider={userProfile} />
                     </View>
                 </View>
 
