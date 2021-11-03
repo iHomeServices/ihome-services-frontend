@@ -66,11 +66,9 @@ export function Settings({navigation}) {
             </View>
 
             <View style={styles(theme).content}>
-                <Pressable
-                    onPress={handleLogout}
-                >
+                <Pressable onPress={handleLogout}>
                     <Text style={[styles(theme).itemText, styles(theme).logoutText]}>
-                        Sair do app
+                        Sair do aplicativo
                     </Text>
                 </Pressable>
             </View>

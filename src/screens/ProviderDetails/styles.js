@@ -13,8 +13,9 @@ export function styles(theme) {
             alignItems: 'center',
         },
         
-        w60: {
-            width: '60%',
+        w50: {
+            width: '50%',
+            paddingHorizontal: 10,
         },
         wh100: {
             width: '100%',

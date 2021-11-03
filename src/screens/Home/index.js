@@ -29,7 +29,7 @@ export function Home({ navigation }) {
   const {theme} = useTheme();
 
   const base64 = `data:${user.avatar?.contentType};base64,${user.avatar?.image}`
-  const avatar = user.avatar.contentType ? { uri: base64 } : default_avatar;
+  const avatar = user.avatar?.contentType ? { uri: base64 } : default_avatar;
 
   const handleChangeCategory = (id) => {
     setCategoryId(id);

@@ -1,6 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, Pressable, Text, View } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { ActivityIndicator, Pressable, Text } from 'react-native';
 import { useTheme } from '../../hooks/theme';
 
 import {styles} from './styles';

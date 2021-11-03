@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StatusBar, Linking, Alert } from 'react-native';
+import { View, StatusBar, Linking, Alert } from 'react-native';
 
 import { styles } from './styles';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -19,6 +19,7 @@ export function ProviderDetails({ route, navigation }) {
     const [provider, setProvider] = useState({});
     const [activeSlide, setActiveSlide] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [isHiring, setIsHiring] = useState(false);
 
     const entries = [
         {
@@ -40,21 +41,13 @@ export function ProviderDetails({ route, navigation }) {
     }
 
     // separar botões: Conversar profissinal, e outro botão de contratar
-    function handleHiring() {
+    function handleChat() {
         const message = `Olá, gostaria de contratar você para realizar um serviço.`;
         const urlWhatsapp = `whatsapp://send?text=${message}&phone=${provider.phoneNumber}`
         const urlSms = `sms:${provider.phoneNumber}?body=${message}`
         
         Linking.canOpenURL(urlWhatsapp)
             .then((supported) => {
-                backendAPI.post(`/provider/service`, {
-                    providerId: providerId,
-                    userId: 1,
-                    date: Date.now(),
-                }).catch(error => {
-                    console.log('Falha na adição de um serviço', error);
-                });
-
                 if (!supported) {
                     return Linking.openURL(urlSms)
                 } else {
@@ -62,6 +55,25 @@ export function ProviderDetails({ route, navigation }) {
                 }
             })
             .catch((err) => Alert.alert('Erro', 'Não foi possível abrir o aplicativo'));
+    }
+
+    async function handleHiring(){
+        setIsHiring(true);
+        try{
+            const response = await backendAPI.post(`/provider/service`, {
+                providerId: providerId,
+                userId: 1,
+                date: Date.now(),
+            });
+            
+            if(response.status === 200){
+                Alert.alert("O profissional foi contratado com sucesso.")
+            }
+        }catch(error){
+            console.log(error);
+        } finally {
+            setIsHiring(false);
+        }        
     }
 
     useEffect(() => {
@@ -132,13 +144,16 @@ export function ProviderDetails({ route, navigation }) {
             </View>
 
             <View style={styles(theme).footer}>
-                <Text style={styles(theme).heading}>
-                    {provider.price}
-                </Text>
-                <View style={styles(theme).w60}>
+                <View style={styles(theme).w50}>
                     <FluidButton
+                        isLoading={isHiring}
                         onPress={handleHiring}
                         text={"Contratar"} />
+                </View>
+                <View style={styles(theme).w50}>
+                    <FluidButton
+                        onPress={handleChat}
+                        text={"Conversar"} />
                 </View>
             </View>
         </View>

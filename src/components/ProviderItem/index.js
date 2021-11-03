@@ -16,8 +16,8 @@ import { useTheme } from '../../hooks/theme';
 export function ProviderItem({ provider, handleClickProvider }) {
     const {theme} = useTheme();
 
-    const uri = provider.avatar.contentType 
-        ? `data:${provider.avatar.contentType};base64,${provider.avatar.image}` 
+    const uri = provider.avatar?.contentType 
+        ? `data:${provider.avatar?.contentType};base64,${provider.avatar?.image}` 
         : provider.avatar;
 
     const avatar = provider.avatar ? { uri: uri } : default_avatar;
