@@ -8,7 +8,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { styles } from './styles';
 import backendAPI from '../../api/backend';
 
-export function HeaderProfile({ provider, editPhoto }) {
+export function HeaderProfile({ provider, editPhoto = false }) {
     const { theme } = useTheme();
 
     const [imageSource, setImageSource] = useState(default_avatar);
@@ -22,7 +22,11 @@ export function HeaderProfile({ provider, editPhoto }) {
         return status
     }
 
-    async function editPhoto() {
+    async function handleEditPhoto() {
+        if(editPhoto === false){
+            return
+        }
+
         const permission = await requestPermission();
         
         if (permission !== 'granted') {
@@ -35,6 +39,10 @@ export function HeaderProfile({ provider, editPhoto }) {
             // base64: true,
             quality: 1,
         });
+        
+        if(result.cancelled){
+            return;
+        }
 
         // ImagePicker saves the taken photo to disk and returns a local URI to it
         let localUri = result.uri;
@@ -86,7 +94,7 @@ export function HeaderProfile({ provider, editPhoto }) {
                     {provider.state && `, ${provider.state}`}
                 </Text>
             </View>
-            <Pressable onPress={editPhoto}>
+            <Pressable onPress={handleEditPhoto}>
                 <Image
                     source={imageSource}
                     style={styles(theme).avatar}

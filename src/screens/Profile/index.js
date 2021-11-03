@@ -215,7 +215,6 @@ export function Profile({ navigation }) {
                     </View>
 
                     <FlatList data={userProfile.services}
-                        style={styles.container}
                         renderItem={InProgressService}
                         ListEmptyComponent={<View style={styles(theme).emptyContainer}>
                             <Text style={styles(theme).emptyText}>Não foi encontrado</Text>

@@ -33,7 +33,7 @@ export function styles(theme) {
         icon: {
             fontSize: 25,
             color: theme.colors.secondary,
-            top: -15
+            top: -20
         }
     });
 }

@@ -5,7 +5,6 @@ export function styles(theme) {
         container: {
             flex: 1,
             backgroundColor: theme.colors.white,
-            height: '100%'
         },
         header: {
             paddingTop: 20,
@@ -17,13 +16,12 @@ export function styles(theme) {
         },
     
         contentContainer: {
-            height: '100%',
+            flex: 1,
             backgroundColor: theme.colors.background,
     
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
     
-            marginTop: 20,
             padding: 20
         },
     
@@ -104,7 +102,7 @@ export function styles(theme) {
         },
 
         optionsService: {
-            marginVertical: 30,
+            marginVertical: 20,
             marginHorizontal: -30,
     
             paddingHorizontal: 30,
