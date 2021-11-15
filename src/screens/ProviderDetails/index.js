@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StatusBar, Linking, Alert } from 'react-native';
+import { View, Linking, Alert } from 'react-native';
 
 import { styles } from './styles';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -82,13 +82,7 @@ export function ProviderDetails({ route, navigation }) {
 
     return (
         <View style={styles(theme).container}>
-            <Loader visible={isLoading} />
-
-            <StatusBar
-                backgroundColor="transparent"
-                translucent={true}
-                barStyle={'light-content'}
-                showHideTransition={'none'} />
+            <Loader visible={isLoading} />            
 
             <View style={styles(theme).carouselContainer}>
                 <View style={styles(theme).carouselTopBarContainer}>

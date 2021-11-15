@@ -22,7 +22,7 @@ function AuthProvider({ children }) {
             const user = response.data;
             await AsyncStorage.setItem(COLLECTION_USERS, JSON.stringify(user));
             setUser(user);
-
+            return user;
         } catch (e) {
             console.log(e);
             Alert.alert('Login', 'Usuário ou senha inválidos');
@@ -56,6 +56,13 @@ function AuthProvider({ children }) {
         }
     }
 
+    function updateUser(newData){
+        setUser({
+            ...user,
+            ...newData
+        });
+    }
+
     async function logout() {
         setUser({});
         await AsyncStorage.removeItem(COLLECTION_USERS);
@@ -77,7 +84,7 @@ function AuthProvider({ children }) {
     return (
         <AuthContext.Provider value={{
             user,
-            setUser,
+            updateUser,
             loading,
             login,
             logout,

@@ -15,7 +15,7 @@ import { styles } from './styles';
 export function EditProfile({ route, navigation }) {
     const user = route.params.userProfile;
 
-    const { setUser } = useAuth();
+    const { updateUser } = useAuth();
     const { theme } = useTheme();
 
     const states = [
@@ -53,10 +53,8 @@ export function EditProfile({ route, navigation }) {
     const [city, setCity] = useState(user.city);
     const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
     const [email, setEmail] = useState(user.email);	
-    const [category, setCategory] = useState(user.category);
+    const [categoryId, setCategoryId] = useState(user.categoryId);
     const [description, setDescription] = useState(user.description);
-    const [images, setImages] = useState(user.images);
-
 
     async function onEditProfile() {
         try {
@@ -67,7 +65,7 @@ export function EditProfile({ route, navigation }) {
                 city,
                 phoneNumber,
                 email,
-                categoryId: category,
+                categoryId: categoryId,
                 description
             } 
 
@@ -76,11 +74,7 @@ export function EditProfile({ route, navigation }) {
             });
 
             if (response.status === 200) {
-                setUser({
-                    ...user,
-                    ...formData
-                });
-
+                updateUser(formData);
                 navigation.navigate('Profile');
             }
         } catch (error) {
@@ -144,9 +138,9 @@ export function EditProfile({ route, navigation }) {
                             <PickerField
                                 label="Categoria"
                                 items={global.CATEGORIES}
-                                selectedValue={category}
+                                selectedValue={categoryId}
                                 onValueChange={(itemValue, itemIndex) => {
-                                    setCategory(itemValue);
+                                    setCategoryId(itemValue);
                                 }} 
                             />
                             <Input

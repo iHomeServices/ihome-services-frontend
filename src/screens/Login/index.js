@@ -15,21 +15,19 @@ export function Login({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const {login, user, loading} = useAuth();
+    const {login, loading} = useAuth();
 
     const handleLoginClick = async () => {
         if(!username || !password) {
             return;
         }
         
-        await login({username, password});
-    }
+        const user = await login({username, password});
 
-    useEffect(() => {
-        if (user._id) {
+        if(user._id) {
             navigation.navigate('Home');
         }
-    }, [user]);
+    }
 
     return (
         <SafeAreaView style={styles(theme).container}>

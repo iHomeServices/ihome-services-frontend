@@ -8,6 +8,7 @@ export const ThemeContext = createContext({});
 
 export function ThemeProvider({children}) {
     const [theme, setTheme] = useState(defaultTheme);
+    const [themeName, setThemeName] = useState("light");
 
     function loadTheme(){
         AsyncStorage.getItem('theme').then(value => {
@@ -22,6 +23,8 @@ export function ThemeProvider({children}) {
                     colors: colorsLight
                 });
             }
+
+            setThemeName(value);
         });
     }
 
@@ -36,13 +39,13 @@ export function ThemeProvider({children}) {
         };
         
         setTheme(newTheme);
-
+        setThemeName(isDark ? "dark" : "light");
         //set in async storage
         AsyncStorage.setItem("theme", isDark ? "dark" : "light");
     }
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme, themeName, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     )

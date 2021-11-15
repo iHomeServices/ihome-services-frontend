@@ -82,7 +82,7 @@ export function Home({ navigation }) {
     getProviders();
 
     getCustomers();
-  }, []);
+  }, [user]);
 
   return (
     <SafeAreaView style={styles(theme).container}>
