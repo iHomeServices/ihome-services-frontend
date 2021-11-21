@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import FullLogo from '../../assets/full_logo.svg';
 import { ScrollView, Text, View, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useIsFocused } from '@react-navigation/native';
 
 import { styles } from './styles';
 import { FluidButton } from '../../components/FluidButton';
@@ -15,19 +16,23 @@ export function Login({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const {login, loading} = useAuth();
+    const isFocused = useIsFocused();
+
+    const {login, loading, user} = useAuth();
 
     const handleLoginClick = async () => {
         if(!username || !password) {
             return;
         }
         
-        const user = await login({username, password});
+        login({username, password});
+    }
 
-        if(user._id) {
+    useEffect(() => {
+        if(isFocused && user._id) {
             navigation.navigate('Home');
         }
-    }
+    }, [user])
 
     return (
         <SafeAreaView style={styles(theme).container}>

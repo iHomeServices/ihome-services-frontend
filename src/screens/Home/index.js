@@ -24,12 +24,10 @@ export function Home({ navigation }) {
   const [categoryId, setCategoryId] = useState('');
   const [categories, setCategories] = useState([]);
   const [providers, setProviders] = useState([]);
+  const [avatar, setAvatar] = useState(default_avatar);
 
   const {user} = useAuth();
   const {theme} = useTheme();
-
-  const base64 = `data:${user.avatar?.contentType};base64,${user.avatar?.image}`
-  const avatar = user.avatar?.contentType ? { uri: base64 } : default_avatar;
 
   const handleChangeCategory = (id) => {
     setCategoryId(id);
@@ -82,6 +80,18 @@ export function Home({ navigation }) {
     getProviders();
 
     getCustomers();
+
+    setAvatar(() => {
+      if(user.avatar?.contentType) {
+        const base64 = `data:${user.avatar?.contentType};base64,${user.avatar?.image}`
+        return user.avatar?.contentType ? { uri: base64 } : default_avatar;
+      }else if(user.avatar) {
+        return { uri: user.avatar };
+      }else{
+        return default_avatar;
+      }
+
+    });
   }, [user]);
 
   return (

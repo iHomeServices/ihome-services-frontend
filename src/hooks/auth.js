@@ -21,8 +21,7 @@ function AuthProvider({ children }) {
 
             const user = response.data;
             await AsyncStorage.setItem(COLLECTION_USERS, JSON.stringify(user));
-            setUser(user);
-            return user;
+            await setUser(user);
         } catch (e) {
             console.log(e);
             Alert.alert('Login', 'Usuário ou senha inválidos');

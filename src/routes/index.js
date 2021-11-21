@@ -19,7 +19,7 @@ export function Routes() {
     const { user } = useAuth();
     const { themeName } = useTheme();
 
-    console.log("user persistence asyncstorage", user);
+    // console.log("user persistence asyncstorage", user);
     return (
         <>
             <StatusBar

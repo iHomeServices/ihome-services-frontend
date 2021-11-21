@@ -74,7 +74,7 @@ export function EditProfile({ route, navigation }) {
             });
 
             if (response.status === 200) {
-                updateUser(formData);
+                await updateUser(formData);
                 navigation.navigate('Profile');
             }
         } catch (error) {

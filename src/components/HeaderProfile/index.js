@@ -7,9 +7,11 @@ import { useTheme } from '../../hooks/theme';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { styles } from './styles';
 import backendAPI from '../../api/backend';
+import { useAuth } from '../../hooks/auth';
 
 export function HeaderProfile({ provider, editPhoto = false }) {
     const { theme } = useTheme();
+    const {updateUser} = useAuth();
 
     const [imageSource, setImageSource] = useState(default_avatar);
 
@@ -64,6 +66,7 @@ export function HeaderProfile({ provider, editPhoto = false }) {
 
         if (response.status === 200) {
             setImageSource({uri: result.uri});
+            updateUser({avatar: result.uri});
         }
     }
 
