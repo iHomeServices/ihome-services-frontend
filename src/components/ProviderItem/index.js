@@ -21,6 +21,8 @@ export function ProviderItem({ provider, handleClickProvider }) {
         : provider.avatar;
 
     const avatar = provider.avatar ? { uri: uri } : default_avatar;
+    const rating = Math.floor(Math.random() * (50 - 5 + 1) + 5)
+    const starRating = Math.floor(Math.random() * (5 - 3 + 1) + 3)
 
     return (
         <View style={styles(theme).container}>
@@ -44,9 +46,9 @@ export function ProviderItem({ provider, handleClickProvider }) {
                                     ratingColor={theme.colors.primary}  
                                     tintColor={theme.colors.white}   
                                     ratingBackgroundColor={theme.colors.lightGray}                 
-                                    startingValue={2.5} />
+                                    startingValue={starRating} />
 
-                                <Text style={styles(theme).opinion}>14 opiniões</Text>
+                                <Text style={styles(theme).opinion}>{rating} opiniões</Text>
                             </View>
                         </View>
                     </View>

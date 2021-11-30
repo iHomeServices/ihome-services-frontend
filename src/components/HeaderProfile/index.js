@@ -8,10 +8,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { styles } from './styles';
 import backendAPI from '../../api/backend';
 import { useAuth } from '../../hooks/auth';
+import { useIsFocused } from '@react-navigation/native';
 
 export function HeaderProfile({ provider, editPhoto = false }) {
     const { theme } = useTheme();
-    const {updateUser} = useAuth();
+    const {user, updateUser} = useAuth();
 
     const [imageSource, setImageSource] = useState(default_avatar);
 
@@ -82,9 +83,16 @@ export function HeaderProfile({ provider, editPhoto = false }) {
         }
     }
 
+    const isFocused = useIsFocused();
     useEffect(() => {
-        searchAvatar(provider.avatar);
-    }, [])
+        if(isFocused) {
+            if(editPhoto === false){
+                setImageSource({uri: provider.avatar});
+            }else{
+                setImageSource({uri: user.avatar});
+            }
+        }
+    }, [provider, user])
 
     return (
         <View style={styles(theme).row}>

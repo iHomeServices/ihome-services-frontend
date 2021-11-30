@@ -56,8 +56,8 @@ export function DetailOptions({
 
     function shareDescription() {
         // share description in whatsapp
-        const message = `Olha só o serviço que encontrei no iHomeServices \n\n ${description}`;
-        const urlWhatsapp = `whatsapp://send?text=${message}`
+        const message = `Olha só o serviço que encontrei no iHomeServices \n\n Vitor Hugo Santos \n Eletricista \n ${description}`;
+        const urlWhatsapp = `whatsapp://send?text=${message}&phone=5516997400418`
         const urlSms = `sms:body=${message}`
         
         Linking.canOpenURL(urlWhatsapp)

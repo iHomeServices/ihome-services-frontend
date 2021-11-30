@@ -23,10 +23,16 @@ export function ProviderDetails({ route, navigation }) {
 
     const entries = [
         {
-            illustration: 'https://i.imgur.com/UYiroysl.jpg'
+            illustration: 'http://s2.glbimg.com/amTRhLJlZ_tkpnbJRaSSlIYk4Rg=/290x217/s2.glbimg.com/PYiM5z8JJ1GnE5Hjcr4ktrKfpJo=/620x465/s.glbimg.com/jo/g1/f/original/2016/06/13/celpe_pauta_20_-_como_a_fiacao_eletrica_pode_influenciar_no_gasto_de_energia_-_foto.jpg'
         },
         {
-            illustration: 'https://i.imgur.com/UPrs1EWl.jpg'
+            illustration: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyn8V4p-pRqw3zhIygWhox9nWSYRWAaLY8uWte3t9ukKsnJ_EGh_mwy3MkH3vNIMIAnUw&usqp=CAU'
+        },
+        {
+            illustration: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuO6WBH7HL4usdMjwjAMvm-yHIfQynrT4dIQ_al1ZU8Q-60yRmAfFAe1-iOY3QdXakxJw&usqp=CAU'
+        },
+        {
+            illustration: 'https://blog.telhanorte.com.br/wp-content/uploads/2020/07/eletricista-residencial-e1605100222158.jpg'
         },
     ];
 
